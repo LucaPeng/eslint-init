@@ -1,0 +1,15 @@
+{
+  "name": "eslint-init",
+  "version": "0.0.1",
+  "description": "integrate eslint to a fe project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eslint",
+    "integrate"
+  ],
+  "author": "lucaPeng",
+  "license": "ISC"
+}
