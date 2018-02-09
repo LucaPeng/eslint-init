@@ -2,14 +2,24 @@
   "name": "eslint-init",
   "version": "0.0.1",
   "description": "integrate eslint to a fe project",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "bin": {
+    "eslint-init": "bin/index.js"
   },
   "keywords": [
     "eslint",
     "integrate"
   ],
   "author": "lucaPeng",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^8.9.1",
+    "@types/yargs": "^10.0.1",
+    "chalk": "^2.3.0",
+    "yargs": "^11.0.0"
+  }
 }
