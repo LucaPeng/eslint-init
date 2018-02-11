@@ -14,12 +14,15 @@
     "eslint",
     "integrate"
   ],
+  "repository": "ssh://git@github.com:LucaPeng/eslint-init.git",
   "author": "lucaPeng",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^8.9.1",
     "@types/yargs": "^10.0.1",
     "chalk": "^2.3.0",
-    "yargs": "^11.0.0"
+    "command-exists": "^1.2.2",
+    "detect-installed": "^2.0.4",
+    "shelljs": "^0.8.1"
   }
 }
