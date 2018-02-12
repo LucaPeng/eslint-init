@@ -1,6 +1,8 @@
 ## eslint-init
 
-fast & simple integrate eslint into your project, and support several types including es6、node、react、vue.
+Fast & simple integrate eslint into your project and your git flow.
+
+Support es6, node, react, and vue project.
 
 ## Installament & Usage
 

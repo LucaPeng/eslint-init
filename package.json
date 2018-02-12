@@ -1,6 +1,6 @@
 {
   "name": "eslint-init",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "integrate eslint to a fe project",
   "main": "dist/index.js",
   "scripts": {
@@ -27,7 +27,6 @@
   "dependencies": {
     "@types/node": "^8.9.1",
     "@types/shelljs": "^0.7.8",
-    "@types/yargs": "^10.0.1",
     "chalk": "^2.3.0",
     "command-exists": "^1.2.2",
     "detect-installed": "^2.0.4",

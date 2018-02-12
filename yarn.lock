@@ -85,10 +85,6 @@
     "@types/glob" "*"
     "@types/node" "*"
 
-"@types/yargs@^10.0.1":
-  version "10.0.1"
-  resolved "http://r.npm.sankuai.com/@types/yargs/download/@types/yargs-10.0.1.tgz#f986e2b5d37f1fb8c13c0ed15f45d01bcc3fb3d6"
-
 acorn-jsx@^3.0.0:
   version "3.0.1"
   resolved "http://r.npm.sankuai.com/acorn-jsx/download/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"

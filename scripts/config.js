@@ -34,3 +34,10 @@ exports.configDeps = {
 exports.DeafultSharedEslintConfig = {
     'eslint-config-mfe': '0.0.1'
 };
+exports.mfeCiDeps = {
+    '@mfe/precommit-eslint': '1.0.7'
+};
+exports.huskyCiDeps = {
+    'husky': '0.14.3',
+    'lint-staged': '6.1.0'
+};

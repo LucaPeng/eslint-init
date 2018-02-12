@@ -43,3 +43,12 @@ export const configDeps: {
 export const DeafultSharedEslintConfig: DepConfig = {
   'eslint-config-mfe': '0.0.1'
 };
+
+export const mfeCiDeps: DepConfig = {
+  '@mfe/precommit-eslint': '1.0.7'
+};
+
+export const huskyCiDeps: DepConfig = {
+  'husky': '0.14.3',
+  'lint-staged': '6.1.0'
+};

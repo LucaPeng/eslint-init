@@ -2,12 +2,8 @@ const chalk = require('chalk');
 import installDeps from './lib/installDeps';
 import installConfig from './lib/installConfig';
 import configEslint from './lib/config';
+import {CiSolution, interEslintToCI} from './lib/ci';
 import { DepConfig } from './config';
-
-enum CiSolution {
-  husky = 1,
-  mfe
-}
 
 interface EslintConfig {
   type: string,
@@ -31,12 +27,10 @@ module.exports = {
     console.log(chalk.green('eslint 配置完成'));
     console.log(chalk.green('正在设置持续集成检查方案'));
     // 配置 package.json
-    // const options = {
-    //   eslintPath: typeof argv.path === 'string' ? argv.path : 'src/**/*.{js,vue}'
-    // };
-    // console.log(chalk.green('开始配置package.json...'));
-    // packageConfiger.configPackage(options);
-    // console.log(chalk.green('持续集成检查方案配置成功'));
+    console.log(chalk.green('开始配置package.json...'));
+    interEslintToCI(ciSolution, projectType);
+    console.log(chalk.green('持续集成检查方案配置成功'));
     console.log(chalk.green('eslint初始化完成, happy coding~'));
+    return true;
   }
 };

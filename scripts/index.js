@@ -12,13 +12,9 @@ const chalk = require('chalk');
 const installDeps_1 = require("./lib/installDeps");
 const installConfig_1 = require("./lib/installConfig");
 const config_1 = require("./lib/config");
-var CiSolution;
-(function (CiSolution) {
-    CiSolution[CiSolution["husky"] = 1] = "husky";
-    CiSolution[CiSolution["mfe"] = 2] = "mfe";
-})(CiSolution || (CiSolution = {}));
+const ci_1 = require("./lib/ci");
 module.exports = {
-    CiSolution,
+    CiSolution: ci_1.CiSolution,
     init(config) {
         return __awaiter(this, void 0, void 0, function* () {
             const { type: projectType, ciSolution, sharedEslintConfig } = config;
@@ -30,7 +26,11 @@ module.exports = {
             yield config_1.default(projectType, sharedEslintConfig);
             console.log(chalk.green('eslint 配置完成'));
             console.log(chalk.green('正在设置持续集成检查方案'));
+            console.log(chalk.green('开始配置package.json...'));
+            ci_1.interEslintToCI(ciSolution, projectType);
+            console.log(chalk.green('持续集成检查方案配置成功'));
             console.log(chalk.green('eslint初始化完成, happy coding~'));
+            return true;
         });
     }
 };
