@@ -1,8 +1,8 @@
 {
   "name": "eslint-init",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "integrate eslint to a fe project",
-  "main": "dist/index.js",
+  "main": "scripts/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
