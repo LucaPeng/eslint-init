@@ -5,22 +5,21 @@
 
 const shell = require('shelljs');
 const chalk = require('chalk');
-import pmTool from '../utils/pm_tool';
-import { DeafultSharedEslintConfig } from '../config';
+import { installPackage } from '../utils/npm_install';
+import { DeafultSharedEslintConfig, DepConfig } from '../config';
 
-const installConfig = async (sharedEslintConfig?: string) => {
+/**
+ * 安装共享的 ESLint 规则集
+ * @param sharedEslintConfig 共享的 ESLint 规则集
+ */
+const installConfig = async (sharedEslintConfig?: DepConfig) => {
   console.log(chalk.green('正在安装 eslint 配置集'));
-  let dep = sharedEslintConfig || DeafultSharedEslintConfig;
-  if (dep.indexOf('@') == -1 || dep.lastIndexOf('@') == 0) {
-    dep = dep + '@latest';
-  }
-  const pmToolName = await pmTool(dep);  
-  if (pmToolName === 'yarn') {
-    shell.exec(`yarn add ${dep} --dev`, { silent: false });
-  } else {
-    shell.exec(`${pmToolName} install ${dep} --save-dev`, { silent: false });
-  }
+  let configDep = sharedEslintConfig || DeafultSharedEslintConfig;
+  const packageName = Object.keys(configDep)[0];
+  const version = configDep[packageName];
+  const result = await installPackage(packageName, version);
   console.log(chalk.green('eslint 配置集安装完成'));
+  return result;
 };
 
 export default installConfig;

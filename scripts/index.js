@@ -26,7 +26,7 @@ module.exports = {
             yield installDeps_1.default(projectType);
             console.log(chalk.green('eslint 依赖安装完成'));
             console.log(chalk.green('正在配置 eslint...'));
-            installConfig_1.default(sharedEslintConfig);
+            yield installConfig_1.default(sharedEslintConfig);
             yield config_1.default(projectType, sharedEslintConfig);
             console.log(chalk.green('eslint 配置完成'));
             console.log(chalk.green('正在设置持续集成检查方案'));

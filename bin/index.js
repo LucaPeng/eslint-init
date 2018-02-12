@@ -2,7 +2,7 @@
 
 const params = process.argv.slice(2);
 let index = 0;
-const initer = require('../dist/index');
+const initer = require('../scripts/index');
 
 let method;
 let projectType;

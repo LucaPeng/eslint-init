@@ -6,7 +6,7 @@
 const shell = require('shelljs');
 const chalk = require('chalk');
 const detectInstalled = require('detect-installed');
-import pmTool from '../utils/pm_tool';
+import { installPackage, upgradePackage } from '../utils/npm_install';
 import { DepConfig, commonDeps, pluginDeps, configDeps } from '../config';
 
 interface InstallResult {
@@ -20,29 +20,17 @@ interface InstallResult {
  */
 async function installDep(packageName: string, version: string): Promise<boolean> {
   console.log(chalk.green(`${packageName}${version ? '@' + version : ''}`));
-  try {
-    const pmToolName = await pmTool(packageName);
-    const packageStr = `${packageName}${version ? '@' + version : '@latest'}`;
-    if (await detectInstalled(packageName, {local: true})) {
-      if (pmToolName === 'yarn') {
-        shell.exec(`yarn upgrade ${packageStr}`, { silent: false });
-      } else {
-        shell.exec(`${pmToolName} install ${packageStr} --save-dev`, { silent: false });
-      }
-    } else {
-      if (pmToolName === 'yarn') {
-        shell.exec(`yarn add ${packageStr} --dev`, { silent: false });
-      } else {
-        shell.exec(`${pmToolName} install ${packageStr} --save-dev`, { silent: false });
-      }
-    }
-  } catch (e) {
-    console.log(chalk.red(`fail to install ${packageName}`), e);
-    return false;
+  if (await detectInstalled(packageName, {local: true})) {
+    return await upgradePackage(packageName, version);
+  } else {
+    return await installPackage(packageName, version)
   }
-  return true;
 }
 
+/**
+ * 安装具体依赖
+ * @param deps 依赖集配置
+ */
 async function installDepList(deps: DepConfig): Promise<InstallResult> {
   const result: InstallResult = {};
   const keys = Object.keys(deps);
@@ -54,8 +42,9 @@ async function installDepList(deps: DepConfig): Promise<InstallResult> {
 }
 
 /**
- * 安装所需依赖
- * @param {Object} config 依赖配置
+ * 安装工程所需依赖
+ * @param {string} projectType 工程类型
+ * @returns {Promise} 安装结果
  */
 async function installDeps(projectType: string): Promise<InstallResult> {
   // install commonDeps
@@ -63,7 +52,7 @@ async function installDeps(projectType: string): Promise<InstallResult> {
   // install pluginDeps
   let pluginResult = {};
   if (pluginDeps[projectType]) {
-    pluginResult = await installDepList(pluginDeps[projectType])
+    pluginResult = await installDepList(pluginDeps[projectType]);
   }
   // install configDeps
   const configResult = await installDepList(configDeps[projectType] || configDeps.default);

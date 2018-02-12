@@ -17,10 +17,9 @@ function default_1(projectType, sharedEslintConfig) {
     return __awaiter(this, void 0, void 0, function* () {
         const eslintRcPath = process.cwd() + '/.eslintrc.js';
         const exsit = yield file_1.default.checkExist(eslintRcPath, false);
-        const eslintConfigPath = `'${sharedEslintConfig || config_1.DeafultSharedEslintConfig}/eslintrc.${projectType}.js'`;
-        const extendStr = `[
-    ${eslintConfigPath}
-  ]`;
+        let configDep = sharedEslintConfig || config_1.DeafultSharedEslintConfig;
+        const packageName = Object.keys(configDep)[0];
+        const eslintConfigPath = `'${packageName}/eslintrc.${projectType}.js'`;
         const eslintConfigContent = `//https://eslint.org/docs/user-guide/configuring
 module.exports = {
   root: true,
@@ -30,7 +29,7 @@ module.exports = {
             yield question_1.default('eslint配置文件已存在，是否要增加团队标准配置扩展(Y/n)').then((ans) => {
                 if (ans !== 'n') {
                     console.log(chalk.green('更新当前 eslintrc.js 配置文件，增加 extend...'));
-                    const modifyResult = file_1.default.syncModifyFile(eslintRcPath, 'utf-8', /(?<=extends:\s)('[^']+'|\[[^]+\])/, extendStr);
+                    const modifyResult = file_1.default.syncModifyFile(eslintRcPath, 'utf-8', /(?<=extends:\s)('[^']+'|\[[^]+\])/, eslintConfigPath);
                     if (modifyResult === true) {
                         console.log(chalk.green('eslintrc.js 配置文件更新完成'));
                     }

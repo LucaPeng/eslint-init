@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "clear-npm": "rm -rf node_modules/ && rm package-lock.json && rm .eslintrc.js"
   },
   "bin": {
     "eslint-init": "bin/index.js"
@@ -17,12 +18,27 @@
   "repository": "ssh://git@github.com:LucaPeng/eslint-init.git",
   "author": "lucaPeng",
   "license": "ISC",
+  "files": [
+    "bin/",
+    "scripts/",
+    "index.d.ts",
+    "README.md"
+  ],
   "dependencies": {
     "@types/node": "^8.9.1",
+    "@types/shelljs": "^0.7.8",
     "@types/yargs": "^10.0.1",
     "chalk": "^2.3.0",
     "command-exists": "^1.2.2",
     "detect-installed": "^2.0.4",
     "shelljs": "^0.8.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.1",
+    "eslint": "4.9.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-mfe": "0.0.1",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-node": "6.0.0"
   }
 }

@@ -2,6 +2,7 @@ const chalk = require('chalk');
 import installDeps from './lib/installDeps';
 import installConfig from './lib/installConfig';
 import configEslint from './lib/config';
+import { DepConfig } from './config';
 
 enum CiSolution {
   husky = 1,
@@ -11,7 +12,7 @@ enum CiSolution {
 interface EslintConfig {
   type: string,
   ciSolution: CiSolution,
-  sharedEslintConfig?: string
+  sharedEslintConfig?: DepConfig
 }
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
     console.log(chalk.green('eslint 依赖安装完成'));
     console.log(chalk.green('正在配置 eslint...'));
     // 安装eslint 配置包
-    installConfig(sharedEslintConfig);
+    await installConfig(sharedEslintConfig);
     // 配置 eslint
     await configEslint(projectType, sharedEslintConfig);
     console.log(chalk.green('eslint 配置完成'));

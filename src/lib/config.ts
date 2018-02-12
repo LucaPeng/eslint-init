@@ -7,20 +7,21 @@ const chalk = require('chalk');
 const fs = require('fs');
 import question from '../utils/question';
 import fileUtil from '../utils/file';
-import { DeafultSharedEslintConfig } from '../config';
+import { DeafultSharedEslintConfig, DepConfig } from '../config';
 
 /**
  * 配置 eslintrc.js 文件的内容
  * 如果存在 eslintrc.js，只修改 extends 字段
  * 如果不存在 eslintrc.js，提供默认的 eslintrc.js 文件
+ * @param projectType 工程类型
+ * @param sharedEslintConfig 共享的eslint规则集
  */
-export default async function (projectType: string, sharedEslintConfig?: string) {
+export default async function (projectType: string, sharedEslintConfig?: DepConfig) {
   const eslintRcPath = process.cwd() + '/.eslintrc.js';
   const exsit = await fileUtil.checkExist(eslintRcPath, false);
-  const eslintConfigPath = `'${sharedEslintConfig || DeafultSharedEslintConfig}/eslintrc.${projectType}.js'`;
-  const extendStr = `[
-    ${eslintConfigPath}
-  ]`;
+  let configDep = sharedEslintConfig || DeafultSharedEslintConfig;
+  const packageName = Object.keys(configDep)[0];
+  const eslintConfigPath = `'${packageName}/eslintrc.${projectType}.js'`;
   const eslintConfigContent = `//https://eslint.org/docs/user-guide/configuring
 module.exports = {
   root: true,
@@ -31,7 +32,7 @@ module.exports = {
     await question('eslint配置文件已存在，是否要增加团队标准配置扩展(Y/n)').then((ans: string) => {
       if (ans !== 'n') {
         console.log(chalk.green('更新当前 eslintrc.js 配置文件，增加 extend...'));
-        const modifyResult = fileUtil.syncModifyFile(eslintRcPath, 'utf-8', /(?<=extends:\s)('[^']+'|\[[^]+\])/, extendStr);
+        const modifyResult = fileUtil.syncModifyFile(eslintRcPath, 'utf-8', /(?<=extends:\s)('[^']+'|\[[^]+\])/, eslintConfigPath);
         if (modifyResult === true) {
           console.log(chalk.green('eslintrc.js 配置文件更新完成'));
         } else {

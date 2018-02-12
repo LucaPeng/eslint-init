@@ -11,36 +11,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const shell = require('shelljs');
 const chalk = require('chalk');
 const detectInstalled = require('detect-installed');
-const pm_tool_1 = require("../utils/pm_tool");
+const npm_install_1 = require("../utils/npm_install");
 const config_1 = require("../config");
 function installDep(packageName, version) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(chalk.green(`${packageName}${version ? '@' + version : ''}`));
-        try {
-            const pmToolName = yield pm_tool_1.default(packageName);
-            const packageStr = `${packageName}${version ? '@' + version : '@latest'}`;
-            if (yield detectInstalled(packageName, { local: true })) {
-                if (pmToolName === 'yarn') {
-                    shell.exec(`yarn add ${packageStr} --dev`, { silent: false });
-                }
-                else {
-                    shell.exec(`${pmToolName} install ${packageStr} --save-dev`, { silent: false });
-                }
-            }
-            else {
-                if (pmToolName === 'yarn') {
-                    shell.exec(`yarn upgrade ${packageStr}`, { silent: false });
-                }
-                else {
-                    shell.exec(`${pmToolName} install ${packageStr} --save-dev`, { silent: false });
-                }
-            }
+        if (yield detectInstalled(packageName, { local: true })) {
+            return yield npm_install_1.upgradePackage(packageName, version);
         }
-        catch (e) {
-            console.log(chalk.red(`fail to install ${packageName}`), e);
-            return false;
+        else {
+            return yield npm_install_1.installPackage(packageName, version);
         }
-        return true;
     });
 }
 function installDepList(deps) {
