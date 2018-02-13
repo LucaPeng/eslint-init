@@ -45,8 +45,9 @@ export const tsDeps: DepConfig = {
   'eslint-plugin-typescript': '0.8.1'
 };
 
+// TODO: set exact version before finnally publish
 export const DeafultSharedEslintConfig: DepConfig = {
-  'eslint-config-mfe': '0.0.3'
+  'eslint-config-mfe': ''
 };
 
 export const mfeCiDeps: DepConfig = {
