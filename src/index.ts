@@ -28,7 +28,7 @@ module.exports = {
     console.log(chalk.green('正在设置持续集成检查方案'));
     // 配置 package.json
     console.log(chalk.green('开始配置package.json...'));
-    interEslintToCI(ciSolution, projectType);
+    await interEslintToCI(ciSolution, projectType);
     console.log(chalk.green('持续集成检查方案配置成功'));
     console.log(chalk.green('eslint初始化完成, happy coding~'));
     return true;

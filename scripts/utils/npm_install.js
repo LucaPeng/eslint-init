@@ -37,7 +37,7 @@ function upgradePackage(packageName, version) {
         const packageStr = `${packageName}${version ? '@' + version : ''}`;
         try {
             if (pmToolName === 'yarn') {
-                shell.exec(`yarn upgrade ${packageStr}`, { silent: false });
+                shell.exec(`yarn upgrade ${packageStr} --dev`, { silent: false });
             }
             else {
                 if (version) {

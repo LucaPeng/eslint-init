@@ -37,7 +37,7 @@ export async function upgradePackage(packageName: string, version?: string) {
   const packageStr = `${packageName}${version ? '@' + version : ''}`;
   try {
     if (pmToolName === 'yarn') {
-      shell.exec(`yarn upgrade ${packageStr}`, { silent: false });
+      shell.exec(`yarn upgrade ${packageStr} --dev`, { silent: false });
     } else {
       if (version) {
         shell.exec(`${pmToolName} install ${packageStr} --save-dev --save-exact`, { silent: false });

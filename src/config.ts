@@ -3,7 +3,7 @@ export interface DepConfig {
 }
 
 export const commonDeps: DepConfig = {
-  'eslint': '4.9.0',
+  'eslint': '4.17.0',
   'babel-eslint': '8.2.1'
 };
 

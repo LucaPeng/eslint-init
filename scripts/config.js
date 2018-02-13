@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.commonDeps = {
-    'eslint': '4.9.0',
+    'eslint': '4.17.0',
     'babel-eslint': '8.2.1'
 };
 exports.pluginDeps = {
