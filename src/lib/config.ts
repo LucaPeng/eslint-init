@@ -9,6 +9,10 @@ import question from '../utils/question';
 import fileUtil from '../utils/file';
 import { DeafultSharedEslintConfig, DepConfig } from '../config';
 
+function hasSpecialTsConfig(projectType: string): boolean {
+  return ['node', 'react'].indexOf(projectType) > -1;
+}
+
 function getEslintExtendsConfig(packageName: string, projectType: string, supportTypeScript: boolean) {
   if (!supportTypeScript) {
     return `[
@@ -17,7 +21,7 @@ function getEslintExtendsConfig(packageName: string, projectType: string, suppor
   } else {
     return `[
     '${packageName}/eslintrc.${projectType}.js',
-    '${packageName}/eslintrc.typescript${projectType === 'react' ? '-react' : ''}.js'
+    '${packageName}/eslintrc.typescript${hasSpecialTsConfig(projectType) ? '-' + projectType : ''}.js'
   ]`;
   }
 }

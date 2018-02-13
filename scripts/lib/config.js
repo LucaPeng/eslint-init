@@ -13,6 +13,9 @@ const fs = require('fs');
 const question_1 = require("../utils/question");
 const file_1 = require("../utils/file");
 const config_1 = require("../config");
+function hasSpecialTsConfig(projectType) {
+    return ['node', 'react'].indexOf(projectType) > -1;
+}
 function getEslintExtendsConfig(packageName, projectType, supportTypeScript) {
     if (!supportTypeScript) {
         return `[
@@ -22,7 +25,7 @@ function getEslintExtendsConfig(packageName, projectType, supportTypeScript) {
     else {
         return `[
     '${packageName}/eslintrc.${projectType}.js',
-    '${packageName}/eslintrc.typescript${projectType === 'react' ? '-react' : ''}.js'
+    '${packageName}/eslintrc.typescript${hasSpecialTsConfig(projectType) ? '-' + projectType : ''}.js'
   ]`;
     }
 }
