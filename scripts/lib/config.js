@@ -13,13 +13,26 @@ const fs = require('fs');
 const question_1 = require("../utils/question");
 const file_1 = require("../utils/file");
 const config_1 = require("../config");
-function default_1(projectType, sharedEslintConfig) {
+function getEslintExtendsConfig(packageName, projectType, supportTypeScript) {
+    if (!supportTypeScript) {
+        return `[
+    '${packageName}/eslintrc.${projectType}.js'
+  ]`;
+    }
+    else {
+        return `[
+    '${packageName}/eslintrc.${projectType}.js',
+    '${packageName}/eslintrc.typescript${projectType === 'react' ? '-react' : ''}.js'
+  ]`;
+    }
+}
+function default_1(projectType, supportTypeScript, sharedEslintConfig) {
     return __awaiter(this, void 0, void 0, function* () {
         const eslintRcPath = process.cwd() + '/.eslintrc.js';
         const exsit = yield file_1.default.checkExist(eslintRcPath, false);
         let configDep = sharedEslintConfig || config_1.DeafultSharedEslintConfig;
         const packageName = Object.keys(configDep)[0];
-        const eslintConfigPath = `'${packageName}/eslintrc.${projectType}.js'`;
+        const eslintConfigPath = getEslintExtendsConfig(packageName, projectType, supportTypeScript);
         const eslintConfigContent = `//https://eslint.org/docs/user-guide/configuring
 module.exports = {
   root: true,

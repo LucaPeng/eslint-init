@@ -35,7 +35,7 @@ function installDepList(deps) {
         return result;
     });
 }
-function installDeps(projectType) {
+function installDeps(projectType, supportTypeScript) {
     return __awaiter(this, void 0, void 0, function* () {
         const commonResult = yield installDepList(config_1.commonDeps);
         let pluginResult = {};
@@ -43,7 +43,11 @@ function installDeps(projectType) {
             pluginResult = yield installDepList(config_1.pluginDeps[projectType]);
         }
         const configResult = yield installDepList(config_1.configDeps[projectType] || config_1.configDeps.default);
-        return Object.assign(commonResult, pluginResult, configResult);
+        let tsResult = {};
+        if (supportTypeScript) {
+            tsResult = yield installDepList(config_1.tsDeps);
+        }
+        return Object.assign(commonResult, pluginResult, configResult, tsResult);
     });
 }
 exports.default = installDeps;

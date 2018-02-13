@@ -65,17 +65,24 @@ function configPackage(eslintPath: string) {
  * @param solutionType 解决方案类型
  * @param projectType 项目类型
  */
-export async function interEslintToCI(solutionType: CiSolution, projectType: string) {
+export async function interEslintToCI(solutionType: CiSolution, projectType: string, supportTypeScript: boolean) {
   if (solutionType === CiSolution.mfe) {
     await installDeps(mfeCiDeps);
   } else {
     await installDeps(huskyCiDeps);
-    let eslintPath = '*.js';
+    const suffix = ['js'];
     if (projectType == 'vue') {
-      eslintPath = '*.{js,vue}';
+      suffix.push('vue');
     } else if (projectType == 'react') {
-      eslintPath = '*.{js,jsx}';
+      suffix.push('jsx');
     }
+    if (supportTypeScript) {
+      suffix.push('ts');
+      if (projectType == 'react') {
+        suffix.push('tsx');
+      }
+    }
+    const eslintPath = `*.${suffix.length > 1 ? '{' + suffix.join(',') + '}' : suffix[0]}`;
     configPackage(eslintPath);
   }
 };

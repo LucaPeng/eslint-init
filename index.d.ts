@@ -12,6 +12,7 @@ export interface DepConfig {
 
 export interface EslintConfig {
   type: string,
+  supportTypeScript: boolean,
   ciSolution: CiSolution,
   sharedEslintConfig?: DepConfig
 }

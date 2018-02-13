@@ -9,6 +9,19 @@ import question from '../utils/question';
 import fileUtil from '../utils/file';
 import { DeafultSharedEslintConfig, DepConfig } from '../config';
 
+function getEslintExtendsConfig(packageName: string, projectType: string, supportTypeScript: boolean) {
+  if (!supportTypeScript) {
+    return `[
+    '${packageName}/eslintrc.${projectType}.js'
+  ]`;
+  } else {
+    return `[
+    '${packageName}/eslintrc.${projectType}.js',
+    '${packageName}/eslintrc.typescript${projectType === 'react' ? '-react' : ''}.js'
+  ]`;
+  }
+}
+
 /**
  * 配置 eslintrc.js 文件的内容
  * 如果存在 eslintrc.js，只修改 extends 字段
@@ -16,12 +29,12 @@ import { DeafultSharedEslintConfig, DepConfig } from '../config';
  * @param projectType 工程类型
  * @param sharedEslintConfig 共享的eslint规则集
  */
-export default async function (projectType: string, sharedEslintConfig?: DepConfig) {
+export default async function (projectType: string, supportTypeScript: boolean, sharedEslintConfig?: DepConfig) {
   const eslintRcPath = process.cwd() + '/.eslintrc.js';
   const exsit = await fileUtil.checkExist(eslintRcPath, false);
   let configDep = sharedEslintConfig || DeafultSharedEslintConfig;
   const packageName = Object.keys(configDep)[0];
-  const eslintConfigPath = `'${packageName}/eslintrc.${projectType}.js'`;
+  const eslintConfigPath = getEslintExtendsConfig(packageName, projectType, supportTypeScript);
   const eslintConfigContent = `//https://eslint.org/docs/user-guide/configuring
 module.exports = {
   root: true,

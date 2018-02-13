@@ -51,20 +51,27 @@ function configPackage(eslintPath) {
         process.exit(1);
     }
 }
-function interEslintToCI(solutionType, projectType) {
+function interEslintToCI(solutionType, projectType, supportTypeScript) {
     return __awaiter(this, void 0, void 0, function* () {
         if (solutionType === CiSolution.mfe) {
             yield installDeps(config_1.mfeCiDeps);
         }
         else {
             yield installDeps(config_1.huskyCiDeps);
-            let eslintPath = '*.js';
+            const suffix = ['js'];
             if (projectType == 'vue') {
-                eslintPath = '*.{js,vue}';
+                suffix.push('vue');
             }
             else if (projectType == 'react') {
-                eslintPath = '*.{js,jsx}';
+                suffix.push('jsx');
             }
+            if (supportTypeScript) {
+                suffix.push('ts');
+                if (projectType == 'react') {
+                    suffix.push('tsx');
+                }
+            }
+            const eslintPath = `*.${suffix.length > 1 ? '{' + suffix.join(',') + '}' : suffix[0]}`;
             configPackage(eslintPath);
         }
     });

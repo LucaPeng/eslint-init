@@ -7,7 +7,7 @@ const shell = require('shelljs');
 const chalk = require('chalk');
 const detectInstalled = require('detect-installed');
 import { installPackage, upgradePackage } from '../utils/npm_install';
-import { DepConfig, commonDeps, pluginDeps, configDeps } from '../config';
+import { DepConfig, commonDeps, pluginDeps, tsDeps, configDeps } from '../config';
 
 interface InstallResult {
   [index: string]: boolean
@@ -46,7 +46,7 @@ async function installDepList(deps: DepConfig): Promise<InstallResult> {
  * @param {string} projectType 工程类型
  * @returns {Promise} 安装结果
  */
-async function installDeps(projectType: string): Promise<InstallResult> {
+async function installDeps(projectType: string, supportTypeScript: boolean): Promise<InstallResult> {
   // install commonDeps
   const commonResult = await installDepList(commonDeps);
   // install pluginDeps
@@ -56,7 +56,11 @@ async function installDeps(projectType: string): Promise<InstallResult> {
   }
   // install configDeps
   const configResult = await installDepList(configDeps[projectType] || configDeps.default);
-  return Object.assign(commonResult, pluginResult, configResult);
+  let tsResult = {};
+  if (supportTypeScript) {
+    tsResult = await installDepList(tsDeps);
+  }
+  return Object.assign(commonResult, pluginResult, configResult, tsResult);
 }
 
 export default installDeps;

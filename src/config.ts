@@ -40,8 +40,13 @@ export const configDeps: {
   }
 };
 
+export const tsDeps: DepConfig = {
+  'typescript-eslint-parser': '13.0.0',
+  'eslint-plugin-typescript': '0.8.1'
+};
+
 export const DeafultSharedEslintConfig: DepConfig = {
-  'eslint-config-mfe': '0.0.1'
+  'eslint-config-mfe': '0.0.3'
 };
 
 export const mfeCiDeps: DepConfig = {

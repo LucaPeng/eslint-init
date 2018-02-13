@@ -31,8 +31,12 @@ exports.configDeps = {
         'eslint-config-airbnb-base': '12.1.0'
     }
 };
+exports.tsDeps = {
+    'typescript-eslint-parser': '13.0.0',
+    'eslint-plugin-typescript': '0.8.1'
+};
 exports.DeafultSharedEslintConfig = {
-    'eslint-config-mfe': '0.0.1'
+    'eslint-config-mfe': '0.0.3'
 };
 exports.mfeCiDeps = {
     '@mfe/precommit-eslint': '1.0.7'
