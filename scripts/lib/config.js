@@ -45,7 +45,7 @@ module.exports = {
             yield question_1.default('eslint配置文件已存在，是否要增加团队标准配置扩展(Y/n)').then((ans) => {
                 if (ans !== 'n') {
                     console.log(chalk.green('更新当前 eslintrc.js 配置文件，增加 extend...'));
-                    const modifyResult = file_1.default.syncModifyFile(eslintRcPath, 'utf-8', /(?<=extends:\s)('[^']+'|\[[^]+\])/, eslintConfigPath);
+                    const modifyResult = file_1.default.syncModifyFile(eslintRcPath, 'utf-8', /(?<=extends:\s)('[^']+'|\[[^]+?\])/, eslintConfigPath);
                     if (modifyResult === true) {
                         console.log(chalk.green('eslintrc.js 配置文件更新完成'));
                     }
