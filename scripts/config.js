@@ -36,7 +36,7 @@ exports.tsDeps = {
     'eslint-plugin-typescript': '0.8.1'
 };
 exports.DeafultSharedEslintConfig = {
-    'eslint-config-mfe': ''
+    'eslint-config-mfe': '0.0.5'
 };
 exports.mfeCiDeps = {
     '@mfe/precommit-eslint': '1.0.7'
