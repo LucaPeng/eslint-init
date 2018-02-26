@@ -46,9 +46,11 @@ export const tsDeps: DepConfig = {
 };
 
 export const DeafultSharedEslintConfig: DepConfig = {
-  'eslint-config-mfe': '0.0.5'
+  //TODO: use @latest until stabled, then use specify version
+  'eslint-config-mfe': ''
 };
 
+// TODO: use 1.0.8 after published
 export const mfeCiDeps: DepConfig = {
   '@mfe/precommit-eslint': '1.0.7'
 };
