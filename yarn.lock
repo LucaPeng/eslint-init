@@ -55,8 +55,8 @@
     to-fast-properties "^2.0.0"
 
 "@types/events@*":
-  version "1.1.0"
-  resolved "http://r.npm.sankuai.com/@types/events/download/@types/events-1.1.0.tgz#93b1be91f63c184450385272c47b6496fd028e02"
+  version "1.2.0"
+  resolved "http://r.npm.sankuai.com/@types/events/download/@types/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
 
 "@types/glob@*":
   version "5.0.35"
@@ -71,12 +71,12 @@
   resolved "http://r.npm.sankuai.com/@types/minimatch/download/@types/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
 
 "@types/node@*":
-  version "9.4.5"
-  resolved "http://r.npm.sankuai.com/@types/node/download/@types/node-9.4.5.tgz#d2a90c634208173d1b1a0a6ba9f1df3de62edcf5"
+  version "9.4.6"
+  resolved "http://r.npm.sankuai.com/@types/node/download/@types/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
 
 "@types/node@^8.9.1":
-  version "8.9.3"
-  resolved "http://r.npm.sankuai.com/@types/node/download/@types/node-8.9.3.tgz#47d00392c5834dd5a095346d72df7ff8995f7365"
+  version "8.9.4"
+  resolved "http://r.npm.sankuai.com/@types/node/download/@types/node-8.9.4.tgz#dfd327582a06c114eb6e0441fa3d6fab35edad48"
 
 "@types/shelljs@^0.7.8":
   version "0.7.8"
@@ -904,8 +904,8 @@ is-stream@^1.1.0:
   resolved "http://r.npm.sankuai.com/is-stream/download/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
 is-windows@^1.0.1:
-  version "1.0.1"
-  resolved "http://r.npm.sankuai.com/is-windows/download/is-windows-1.0.1.tgz#310db70f742d259a16a369202b51af84233310d9"
+  version "1.0.2"
+  resolved "http://r.npm.sankuai.com/is-windows/download/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
 
 isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
