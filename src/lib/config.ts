@@ -3,11 +3,12 @@
  * @author songpeng02
  */
 
-const chalk = require('chalk');
-const fs = require('fs');
 import question from '../utils/question';
 import fileUtil from '../utils/file';
 import { DeafultSharedEslintConfig, DepConfig } from '../config';
+
+const chalk = require('chalk');
+const fs = require('fs');
 
 function hasSpecialTsConfig(projectType: string): boolean {
   return ['node', 'react'].indexOf(projectType) > -1;
@@ -96,4 +97,4 @@ module.exports = {
       console.log(chalk.green('eslint配置完成'));
     }
   }
-};
+}

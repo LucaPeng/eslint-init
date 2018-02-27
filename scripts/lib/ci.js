@@ -19,7 +19,6 @@ var CiSolution;
     CiSolution[CiSolution["husky"] = 2] = "husky";
     CiSolution[CiSolution["mfe"] = 3] = "mfe";
 })(CiSolution = exports.CiSolution || (exports.CiSolution = {}));
-;
 function installDeps(deps) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = {};
@@ -31,16 +30,16 @@ function installDeps(deps) {
     });
 }
 function configPackage(eslintPath) {
-    const packagePath = process.cwd() + '/package.json';
+    const packagePath = `${process.cwd()}/package.json`;
     const packageExist = file_1.default.checkExist(packagePath, false);
     if (packageExist) {
         const fileContent = fs.readFileSync(packagePath, 'utf-8');
         const fileJSON = JSON.parse(fileContent);
         fileJSON.scripts = Object.assign(fileJSON.scripts || {}, {
-            precommit: 'lint-staged'
+            precommit: 'lint-staged',
         });
         fileJSON['lint-staged'] = {
-            [eslintPath]: 'eslint'
+            [eslintPath]: 'eslint',
         };
         const fileNewContent = JSON.stringify(fileJSON, null, 2);
         fs.writeFileSync(packagePath, fileNewContent);
@@ -59,22 +58,21 @@ function interEslintToCI(solutionType, projectType, supportTypeScript) {
         else {
             yield installDeps(config_1.huskyCiDeps);
             const suffix = ['js'];
-            if (projectType == 'vue') {
+            if (projectType === 'vue') {
                 suffix.push('vue');
             }
-            else if (projectType == 'react') {
+            else if (projectType === 'react') {
                 suffix.push('jsx');
             }
             if (supportTypeScript) {
                 suffix.push('ts');
-                if (projectType == 'react') {
+                if (projectType === 'react') {
                     suffix.push('tsx');
                 }
             }
-            const eslintPath = `*.${suffix.length > 1 ? '{' + suffix.join(',') + '}' : suffix[0]}`;
+            const eslintPath = `*.${suffix.length > 1 ? `{${suffix.join(',')}}` : suffix[0]}`;
             configPackage(eslintPath);
         }
     });
 }
 exports.interEslintToCI = interEslintToCI;
-;

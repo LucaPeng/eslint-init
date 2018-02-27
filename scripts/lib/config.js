@@ -8,11 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const chalk = require('chalk');
-const fs = require('fs');
 const question_1 = require("../utils/question");
 const file_1 = require("../utils/file");
 const config_1 = require("../config");
+const chalk = require('chalk');
+const fs = require('fs');
 function hasSpecialTsConfig(projectType) {
     return ['node', 'react'].indexOf(projectType) > -1;
 }
@@ -96,4 +96,3 @@ module.exports = {
     });
 }
 exports.default = default_1;
-;

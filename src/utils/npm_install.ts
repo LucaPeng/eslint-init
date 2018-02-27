@@ -13,19 +13,19 @@ import * as shell from 'shelljs';
  */
 export async function installPackage(packageName: string, version?: string) {
   const pmToolName = await pmTool(packageName);
-  const packageStr = `${packageName}${version ? '@' + version : '@latest'}`;
+  const packageStr = `${packageName}${version ? `@${version}` : '@latest'}`;
   try {
     if (pmToolName === 'yarn') {
       shell.exec(`yarn add ${packageStr} --dev`, { silent: false });
     } else {
       shell.exec(`${pmToolName} install ${packageStr} --save-dev --save-exact`, { silent: false });
     }
-  } catch(e) {
+  } catch (e) {
     console.log(e);
     return false;
   }
   return true;
-};
+}
 
 /**
  * 升级npm包
@@ -34,7 +34,7 @@ export async function installPackage(packageName: string, version?: string) {
  */
 export async function upgradePackage(packageName: string, version?: string) {
   const pmToolName = await pmTool(packageName);
-  const packageStr = `${packageName}${version ? '@' + version : ''}`;
+  const packageStr = `${packageName}${version ? `@${version}` : ''}`;
   try {
     if (pmToolName === 'yarn') {
       shell.exec(`yarn upgrade ${packageStr} --dev`, { silent: false });
@@ -45,9 +45,9 @@ export async function upgradePackage(packageName: string, version?: string) {
         shell.exec(`${pmToolName} update ${packageStr}`, { silent: false });
       }
     }
-  } catch(e) {
+  } catch (e) {
     console.log(e);
     return false;
   }
   return true;
-};
+}

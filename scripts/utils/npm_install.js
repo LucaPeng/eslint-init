@@ -13,7 +13,7 @@ const shell = require("shelljs");
 function installPackage(packageName, version) {
     return __awaiter(this, void 0, void 0, function* () {
         const pmToolName = yield pm_tool_1.default(packageName);
-        const packageStr = `${packageName}${version ? '@' + version : '@latest'}`;
+        const packageStr = `${packageName}${version ? `@${version}` : '@latest'}`;
         try {
             if (pmToolName === 'yarn') {
                 shell.exec(`yarn add ${packageStr} --dev`, { silent: false });
@@ -30,11 +30,10 @@ function installPackage(packageName, version) {
     });
 }
 exports.installPackage = installPackage;
-;
 function upgradePackage(packageName, version) {
     return __awaiter(this, void 0, void 0, function* () {
         const pmToolName = yield pm_tool_1.default(packageName);
-        const packageStr = `${packageName}${version ? '@' + version : ''}`;
+        const packageStr = `${packageName}${version ? `@${version}` : ''}`;
         try {
             if (pmToolName === 'yarn') {
                 shell.exec(`yarn upgrade ${packageStr} --dev`, { silent: false });
@@ -56,4 +55,3 @@ function upgradePackage(packageName, version) {
     });
 }
 exports.upgradePackage = upgradePackage;
-;

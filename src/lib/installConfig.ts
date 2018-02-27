@@ -3,10 +3,10 @@
  * @author lucaPeng
  */
 
-const shell = require('shelljs');
-const chalk = require('chalk');
 import { installPackage } from '../utils/npm_install';
 import { DeafultSharedEslintConfig, DepConfig } from '../config';
+
+const chalk = require('chalk');
 
 /**
  * 安装共享的 ESLint 规则集
@@ -14,7 +14,7 @@ import { DeafultSharedEslintConfig, DepConfig } from '../config';
  */
 const installConfig = async (sharedEslintConfig?: DepConfig) => {
   console.log(chalk.green('正在安装 eslint 配置集'));
-  let configDep = sharedEslintConfig || DeafultSharedEslintConfig;
+  const configDep = sharedEslintConfig || DeafultSharedEslintConfig;
   const packageName = Object.keys(configDep)[0];
   const version = configDep[packageName];
   const result = await installPackage(packageName, version);

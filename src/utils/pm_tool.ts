@@ -4,11 +4,12 @@
  */
 
 import fileUtil from './file';
+
 const commandExists = require('command-exists');
 
-export default async function(packageName?: string): Promise<string> {
+async function getPmTool(packageName?: string): Promise<string> {
   let pmTool;
-  if (await fileUtil.checkExist(process.cwd() + '/yarn.lock', false) && await commandExists('yarn')) {
+  if (await fileUtil.checkExist(`${process.cwd()}/yarn.lock`, false) && await commandExists('yarn')) {
     // 如果当前项目下有 yarn.lock 且 安装了 yarn
     pmTool = 'yarn';
   } else {
@@ -20,4 +21,6 @@ export default async function(packageName?: string): Promise<string> {
     }
   }
   return pmTool;
-};
+}
+
+export default getPmTool;

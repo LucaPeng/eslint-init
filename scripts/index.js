@@ -8,16 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const chalk = require('chalk');
 const installDeps_1 = require("./lib/installDeps");
 const installConfig_1 = require("./lib/installConfig");
 const config_1 = require("./lib/config");
 const ci_1 = require("./lib/ci");
+const chalk = require('chalk');
 module.exports = {
     CiSolution: ci_1.CiSolution,
     init(config) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { type: projectType, supportTypeScript, ciSolution, sharedEslintConfig } = config;
+            const { type: projectType, supportTypeScript, ciSolution, sharedEslintConfig, } = config;
             console.log(chalk.green('正在安装 eslint 相关依赖 ...'));
             yield installDeps_1.default(projectType, supportTypeScript);
             console.log(chalk.green('eslint 依赖安装完成'));
@@ -32,5 +32,5 @@ module.exports = {
             console.log(chalk.green('eslint初始化完成, happy coding~'));
             return true;
         });
-    }
+    },
 };

@@ -11,7 +11,7 @@ const readline = require('readline');
  * @param {String} filePath 文件路径
  * @return {fs.Stat | Boolean} 文件信息对象 | false 代表文件不存在
  */
-function hasFile(filePath:string) {
+function hasFile(filePath: string) {
   if (filePath) {
     let s;
     try {
@@ -31,16 +31,16 @@ function hasFile(filePath:string) {
  * @param {Boolean} askForOverWrite 是否询问要覆写该文件，如果 询问 且 用户选择覆写，则认为该文件不存在
  * @return {Promise} 返回延迟结果，true 为文件已存在，false 为文件不存在 或 文件已存在但决定覆盖
  */
-function checkExist(filePath:string, askForOverWrite = false) {
+function checkExist(filePath: string, askForOverWrite = false) {
   return new Promise((resolve) => {
     const fileStat = hasFile(filePath);
     if (fileStat && fileStat.isFile()) {
       if (askForOverWrite) {
         const rl = readline.createInterface({
           input: process.stdin,
-          output: process.stdout
+          output: process.stdout,
         });
-        rl.question(`${filePath}文件已存在，是否要覆盖(Y/n)?`, (ans:string) => {
+        rl.question(`${filePath}文件已存在，是否要覆盖(Y/n)?`, (ans: string) => {
           rl.close();
           if (ans !== 'n') {
             resolve(false);
@@ -65,7 +65,7 @@ function checkExist(filePath:string, askForOverWrite = false) {
  * @param {String} replace 被替换的内容
  * @return {Boolean} 替换结果，true为成功，false为失败
  */
-function syncModifyFile(filePath:string, encode = 'utf8', pattern: any, replace: string) {
+function syncModifyFile(filePath: string, encode = 'utf8', pattern: any, replace: string) {
   let fileContent;
   try {
     fileContent = fs.readFileSync(filePath, encode);
@@ -86,5 +86,5 @@ function syncModifyFile(filePath:string, encode = 'utf8', pattern: any, replace:
 export default {
   hasFile,
   checkExist,
-  syncModifyFile
+  syncModifyFile,
 };

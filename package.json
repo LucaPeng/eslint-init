@@ -1,12 +1,13 @@
 {
   "name": "eslint-init",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "integrate eslint to a fe project",
   "main": "scripts/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "clear-npm": "rm -rf node_modules/ && rm package-lock.json && rm .eslintrc.js"
+    "clear-npm": "rm -rf node_modules/ && rm package-lock.json && rm .eslintrc.js",
+    "precommit": "lint-staged"
   },
   "bin": {
     "eslint-init": "bin/index.js"
@@ -34,10 +35,18 @@
   },
   "devDependencies": {
     "babel-eslint": "8.2.1",
-    "eslint": "4.9.0",
+    "eslint": "4.17.0",
     "eslint-config-airbnb-base": "12.1.0",
-    "eslint-config-mfe": "0.0.1",
+    "eslint-config-mfe": "^0.0.6",
     "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-node": "6.0.0"
+    "eslint-plugin-node": "6.0.0",
+    "eslint-plugin-typescript": "0.8.1",
+    "husky": "0.14.3",
+    "lint-staged": "6.1.0",
+    "typescript": "^2.7.2",
+    "typescript-eslint-parser": "13.0.0"
+  },
+  "lint-staged": {
+    "src/*/*.{js,ts}": "eslint"
   }
 }

@@ -1,21 +1,28 @@
-const chalk = require('chalk');
 import installDeps from './lib/installDeps';
 import installConfig from './lib/installConfig';
 import configEslint from './lib/config';
-import {CiSolution, interEslintToCI} from './lib/ci';
+import { CiSolution, interEslintToCI } from './lib/ci';
 import { DepConfig } from './config';
 
+const chalk = require('chalk');
+
+
 interface EslintConfig {
-  type: string,
-  supportTypeScript: boolean,
-  ciSolution: CiSolution,
-  sharedEslintConfig?: DepConfig
+  type: string;
+  supportTypeScript: boolean;
+  ciSolution: CiSolution;
+  sharedEslintConfig?: DepConfig;
 }
 
 module.exports = {
   CiSolution,
   async init(config: EslintConfig) {
-    const { type: projectType, supportTypeScript, ciSolution, sharedEslintConfig } = config;
+    const {
+      type: projectType,
+      supportTypeScript,
+      ciSolution,
+      sharedEslintConfig,
+    } = config;
     // 安装相关依赖
     console.log(chalk.green('正在安装 eslint 相关依赖 ...'));
     await installDeps(projectType, supportTypeScript);
@@ -33,5 +40,5 @@ module.exports = {
     console.log(chalk.green('持续集成检查方案配置成功'));
     console.log(chalk.green('eslint初始化完成, happy coding~'));
     return true;
-  }
+  },
 };

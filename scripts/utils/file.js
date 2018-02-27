@@ -25,7 +25,7 @@ function checkExist(filePath, askForOverWrite = false) {
             if (askForOverWrite) {
                 const rl = readline.createInterface({
                     input: process.stdin,
-                    output: process.stdout
+                    output: process.stdout,
                 });
                 rl.question(`${filePath}文件已存在，是否要覆盖(Y/n)?`, (ans) => {
                     rl.close();
@@ -68,5 +68,5 @@ function syncModifyFile(filePath, encode = 'utf8', pattern, replace) {
 exports.default = {
     hasFile,
     checkExist,
-    syncModifyFile
+    syncModifyFile,
 };

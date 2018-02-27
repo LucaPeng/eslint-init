@@ -3,17 +3,18 @@
  * @desc integrate eslint into ci flow, provide husky & mfe solutions
  */
 
-import {installPackage} from '../utils/npm_install';
-import {DepConfig, mfeCiDeps, huskyCiDeps} from '../config';
+import { installPackage } from '../utils/npm_install';
+import { DepConfig, mfeCiDeps, huskyCiDeps } from '../config';
 import * as fs from 'fs';
 import fileUtil from '../utils/file';
+
 const chalk = require('chalk');
 
 export enum CiSolution {
   none = 1,
   husky,
-  mfe
-};
+  mfe,
+}
 
 /**
  * 安装所需依赖
@@ -35,7 +36,7 @@ async function installDeps(deps: DepConfig) {
  * @param eslintPath eslint检查路径
  */
 function configPackage(eslintPath: string) {
-  const packagePath = process.cwd() + '/package.json';
+  const packagePath = `${process.cwd()}/package.json`;
   const packageExist = fileUtil.checkExist(packagePath, false);
   if (packageExist) {
     // 如果package.json存在，进行修改
@@ -43,11 +44,11 @@ function configPackage(eslintPath: string) {
     const fileJSON = JSON.parse(fileContent);
     // 增加 precommit hook
     fileJSON.scripts = Object.assign(fileJSON.scripts || {}, {
-      precommit: 'lint-staged'
+      precommit: 'lint-staged',
     });
     // 配置 lint-staged
     fileJSON['lint-staged'] = {
-      [eslintPath]: 'eslint'
+      [eslintPath]: 'eslint',
     };
     const fileNewContent = JSON.stringify(fileJSON, null, 2);
     // 写入
@@ -71,18 +72,18 @@ export async function interEslintToCI(solutionType: CiSolution, projectType: str
   } else {
     await installDeps(huskyCiDeps);
     const suffix = ['js'];
-    if (projectType == 'vue') {
+    if (projectType === 'vue') {
       suffix.push('vue');
-    } else if (projectType == 'react') {
+    } else if (projectType === 'react') {
       suffix.push('jsx');
     }
     if (supportTypeScript) {
       suffix.push('ts');
-      if (projectType == 'react') {
+      if (projectType === 'react') {
         suffix.push('tsx');
       }
     }
-    const eslintPath = `*.${suffix.length > 1 ? '{' + suffix.join(',') + '}' : suffix[0]}`;
+    const eslintPath = `*.${suffix.length > 1 ? `{${suffix.join(',')}}` : suffix[0]}`;
     configPackage(eslintPath);
   }
-};
+}

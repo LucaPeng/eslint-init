@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline = require('readline');
 function question(query) {
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
         const rl = readline.createInterface({
             input: process.stdin,
-            output: process.stdout
+            output: process.stdout,
         });
         rl.question(query, (ans) => {
             rl.close();
@@ -14,4 +14,3 @@ function question(query) {
     });
 }
 exports.default = question;
-;

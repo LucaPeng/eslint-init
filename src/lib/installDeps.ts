@@ -3,14 +3,14 @@
  * @author lucaPeng
  */
 
-const shell = require('shelljs');
-const chalk = require('chalk');
-const detectInstalled = require('detect-installed');
 import { installPackage, upgradePackage } from '../utils/npm_install';
 import { DepConfig, commonDeps, pluginDeps, tsDeps, configDeps } from '../config';
 
+const chalk = require('chalk');
+const detectInstalled = require('detect-installed');
+
 interface InstallResult {
-  [index: string]: boolean
+  [index: string]: boolean;
 }
 
 /**
@@ -20,10 +20,10 @@ interface InstallResult {
  */
 async function installDep(packageName: string, version: string): Promise<boolean> {
   console.log(chalk.green(`${packageName}${version ? '@' + version : ''}`));
-  if (await detectInstalled(packageName, {local: true})) {
+  if (await detectInstalled(packageName, { local: true })) {
     return await upgradePackage(packageName, version);
   } else {
-    return await installPackage(packageName, version)
+    return await installPackage(packageName, version);
   }
 }
 

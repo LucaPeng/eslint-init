@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const file_1 = require("./file");
 const commandExists = require('command-exists');
-function default_1(packageName) {
+function getPmTool(packageName) {
     return __awaiter(this, void 0, void 0, function* () {
         let pmTool;
-        if ((yield file_1.default.checkExist(process.cwd() + '/yarn.lock', false)) && (yield commandExists('yarn'))) {
+        if ((yield file_1.default.checkExist(`${process.cwd()}/yarn.lock`, false)) && (yield commandExists('yarn'))) {
             pmTool = 'yarn';
         }
         else {
@@ -27,5 +27,4 @@ function default_1(packageName) {
         return pmTool;
     });
 }
-exports.default = default_1;
-;
+exports.default = getPmTool;

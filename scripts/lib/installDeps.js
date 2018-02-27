@@ -8,11 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const shell = require('shelljs');
-const chalk = require('chalk');
-const detectInstalled = require('detect-installed');
 const npm_install_1 = require("../utils/npm_install");
 const config_1 = require("../config");
+const chalk = require('chalk');
+const detectInstalled = require('detect-installed');
 function installDep(packageName, version) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(chalk.green(`${packageName}${version ? '@' + version : ''}`));
