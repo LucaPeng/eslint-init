@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require('fs');
-const chalk = require('chalk');
-const readline = require('readline');
+var fs = require('fs');
+var chalk = require('chalk');
+var readline = require('readline');
 function hasFile(filePath) {
     if (filePath) {
-        let s;
+        var s = void 0;
         try {
             s = fs.statSync(filePath);
         }
@@ -18,17 +18,18 @@ function hasFile(filePath) {
         return false;
     }
 }
-function checkExist(filePath, askForOverWrite = false) {
-    return new Promise((resolve) => {
-        const fileStat = hasFile(filePath);
+function checkExist(filePath, askForOverWrite) {
+    if (askForOverWrite === void 0) { askForOverWrite = false; }
+    return new Promise(function (resolve) {
+        var fileStat = hasFile(filePath);
         if (fileStat && fileStat.isFile()) {
             if (askForOverWrite) {
-                const rl = readline.createInterface({
+                var rl_1 = readline.createInterface({
                     input: process.stdin,
                     output: process.stdout,
                 });
-                rl.question(`${filePath}文件已存在，是否要覆盖(Y/n)?`, (ans) => {
-                    rl.close();
+                rl_1.question(filePath + "\u6587\u4EF6\u5DF2\u5B58\u5728\uFF0C\u662F\u5426\u8981\u8986\u76D6(Y/n)?", function (ans) {
+                    rl_1.close();
                     if (ans !== 'n') {
                         resolve(false);
                     }
@@ -46,27 +47,28 @@ function checkExist(filePath, askForOverWrite = false) {
         }
     });
 }
-function syncModifyFile(filePath, encode = 'utf8', pattern, replace) {
-    let fileContent;
+function syncModifyFile(filePath, encode, pattern, replace) {
+    if (encode === void 0) { encode = 'utf8'; }
+    var fileContent;
     try {
         fileContent = fs.readFileSync(filePath, encode);
     }
     catch (err) {
-        console.log(chalk.red(`read ${filePath} failed`));
+        console.log(chalk.red("read " + filePath + " failed"));
         return false;
     }
-    const newFileContent = fileContent.replace(pattern, replace);
+    var newFileContent = fileContent.replace(pattern, replace);
     try {
         fs.writeFileSync(filePath, newFileContent);
     }
     catch (err) {
-        console.log(chalk.red(`modify ${filePath} failed`));
+        console.log(chalk.red("modify " + filePath + " failed"));
         return false;
     }
     return true;
 }
 exports.default = {
-    hasFile,
-    checkExist,
-    syncModifyFile,
+    hasFile: hasFile,
+    checkExist: checkExist,
+    syncModifyFile: syncModifyFile,
 };

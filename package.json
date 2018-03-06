@@ -31,13 +31,15 @@
     "chalk": "^2.3.0",
     "command-exists": "^1.2.2",
     "detect-installed": "^2.0.4",
+    "lodash": "^4.17.5",
     "shelljs": "^0.8.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.104",
     "babel-eslint": "8.2.1",
     "eslint": "4.17.0",
     "eslint-config-airbnb-base": "12.1.0",
-    "eslint-config-mfe": "^0.0.6",
+    "eslint-config-mfe": "^0.0.7",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-node": "6.0.0",
     "eslint-plugin-typescript": "0.8.1",

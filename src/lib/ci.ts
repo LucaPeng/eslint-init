@@ -7,6 +7,7 @@ import { installPackage } from '../utils/npm_install';
 import { DepConfig, mfeCiDeps, huskyCiDeps } from '../config';
 import * as fs from 'fs';
 import fileUtil from '../utils/file';
+import * as _ from 'lodash';
 
 const chalk = require('chalk');
 
@@ -43,7 +44,7 @@ function configPackage(eslintPath: string) {
     const fileContent = fs.readFileSync(packagePath, 'utf-8');
     const fileJSON = JSON.parse(fileContent);
     // 增加 precommit hook
-    fileJSON.scripts = Object.assign(fileJSON.scripts || {}, {
+    fileJSON.scripts = _.assign(fileJSON.scripts || {}, {
       precommit: 'lint-staged',
     });
     // 配置 lint-staged

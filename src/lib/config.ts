@@ -6,6 +6,7 @@
 import question from '../utils/question';
 import fileUtil from '../utils/file';
 import { DeafultSharedEslintConfig, DepConfig } from '../config';
+import * as _ from 'lodash';
 
 const chalk = require('chalk');
 const fs = require('fs');
@@ -34,7 +35,7 @@ function getEslintExtendsConfig(packageName: string, projectType: string, suppor
  * @param projectType 工程类型
  * @param sharedEslintConfig 共享的eslint规则集
  */
-export default async function (projectType: string, supportTypeScript: boolean, sharedEslintConfig?: DepConfig) {
+async function configEslintRC(projectType: string, supportTypeScript: boolean, sharedEslintConfig?: DepConfig) {
   const eslintRcPath = process.cwd() + '/.eslintrc.js';
   const exsit = await fileUtil.checkExist(eslintRcPath, false);
   let configDep = sharedEslintConfig || DeafultSharedEslintConfig;
@@ -70,7 +71,7 @@ module.exports = {
           const fileContent = fs.readFileSync(eslintRcOld, 'utf-8');
           const fileJSON = JSON.parse(fileContent);
           // 增加 precommit hook
-          const newFileJSON = Object.assign({
+          const newFileJSON = _.assign({
             extends: eslintConfigPath
           }, fileJSON);
           if (newFileJSON && newFileJSON.rules) {
@@ -98,3 +99,5 @@ module.exports = {
     }
   }
 }
+
+export default configEslintRC;

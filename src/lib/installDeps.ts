@@ -5,6 +5,7 @@
 
 import { installPackage, upgradePackage } from '../utils/npm_install';
 import { DepConfig, commonDeps, pluginDeps, tsDeps, configDeps } from '../config';
+import * as _ from 'lodash';
 
 const chalk = require('chalk');
 const detectInstalled = require('detect-installed');
@@ -60,7 +61,7 @@ async function installDeps(projectType: string, supportTypeScript: boolean): Pro
   if (supportTypeScript) {
     tsResult = await installDepList(tsDeps);
   }
-  return Object.assign(commonResult, pluginResult, configResult, tsResult);
+  return _.assign(commonResult, pluginResult, configResult, tsResult);
 }
 
 export default installDeps;

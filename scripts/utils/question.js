@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const readline = require('readline');
+var readline = require('readline');
 function question(query) {
-    return new Promise((resolve) => {
-        const rl = readline.createInterface({
+    return new Promise(function (resolve) {
+        var rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout,
         });
-        rl.question(query, (ans) => {
+        rl.question(query, function (ans) {
             rl.close();
             resolve(ans);
         });
