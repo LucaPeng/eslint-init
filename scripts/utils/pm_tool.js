@@ -39,30 +39,44 @@ var file_1 = require("./file");
 var commandExists = require('command-exists');
 function getPmTool(packageName) {
     return __awaiter(this, void 0, void 0, function () {
-        var pmTool, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: return [4, file_1.default.checkExist(process.cwd() + "/yarn.lock", false)];
+        var pmTool, _a, _b, err_1;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    _c.trys.push([0, 8, , 9]);
+                    return [4, file_1.default.checkExist(process.cwd() + "/yarn.lock", false)];
                 case 1:
-                    _a = (_b.sent());
+                    _a = (_c.sent());
                     if (!_a) return [3, 3];
                     return [4, commandExists('yarn')];
                 case 2:
-                    _a = (_b.sent());
-                    _b.label = 3;
+                    _a = (_c.sent());
+                    _c.label = 3;
                 case 3:
-                    if (_a) {
-                        pmTool = 'yarn';
+                    if (!_a) return [3, 4];
+                    pmTool = 'yarn';
+                    return [3, 7];
+                case 4:
+                    _b = packageName && packageName[0] === '@';
+                    if (!_b) return [3, 6];
+                    return [4, commandExists('mnpm')];
+                case 5:
+                    _b = (_c.sent());
+                    _c.label = 6;
+                case 6:
+                    if (_b) {
+                        pmTool = 'mnpm';
                     }
                     else {
-                        if (packageName && packageName[0] === '@') {
-                            pmTool = 'mnpm';
-                        }
-                        else {
-                            pmTool = 'npm';
-                        }
+                        pmTool = 'npm';
                     }
-                    return [2, pmTool];
+                    _c.label = 7;
+                case 7: return [3, 9];
+                case 8:
+                    err_1 = _c.sent();
+                    pmTool = 'npm';
+                    return [3, 9];
+                case 9: return [2, pmTool];
             }
         });
     });

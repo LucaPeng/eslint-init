@@ -1,6 +1,6 @@
 {
   "name": "eslint-init",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "integrate eslint to a fe project",
   "main": "scripts/index.js",
   "scripts": {
