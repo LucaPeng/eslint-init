@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var logger_1 = require("../lib/logger");
 var fs = require('fs');
 var chalk = require('chalk');
 var readline = require('readline');
@@ -50,11 +51,12 @@ function checkExist(filePath, askForOverWrite) {
 function syncModifyFile(filePath, encode, pattern, replace) {
     if (encode === void 0) { encode = 'utf8'; }
     var fileContent;
+    var log = logger_1.getConsisLogger();
     try {
         fileContent = fs.readFileSync(filePath, encode);
     }
     catch (err) {
-        console.log(chalk.red("read " + filePath + " failed"));
+        log(chalk.red("read " + filePath + " failed"));
         return false;
     }
     var newFileContent = fileContent.replace(pattern, replace);
@@ -62,7 +64,7 @@ function syncModifyFile(filePath, encode, pattern, replace) {
         fs.writeFileSync(filePath, newFileContent);
     }
     catch (err) {
-        console.log(chalk.red("modify " + filePath + " failed"));
+        log(chalk.red("modify " + filePath + " failed"));
         return false;
     }
     return true;

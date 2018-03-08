@@ -5,6 +5,7 @@
 
 import pmTool from './pm_tool';
 import * as shell from 'shelljs';
+import { getConsisLogger } from '../lib/logger';
 
 /**
  * 安装npm包
@@ -21,7 +22,8 @@ export async function installPackage(packageName: string, version?: string) {
       shell.exec(`${pmToolName} install ${packageStr} --save-dev --save-exact`, { silent: false });
     }
   } catch (e) {
-    console.log(e);
+    const log = getConsisLogger();
+    log(e);
     return false;
   }
   return true;
@@ -46,7 +48,8 @@ export async function upgradePackage(packageName: string, version?: string) {
       }
     }
   } catch (e) {
-    console.log(e);
+    const log = getConsisLogger();
+    log(e);
     return false;
   }
   return true;

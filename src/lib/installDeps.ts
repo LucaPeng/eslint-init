@@ -6,6 +6,7 @@
 import { installPackage, upgradePackage } from '../utils/npm_install';
 import { DepConfig, commonDeps, pluginDeps, tsDeps, configDeps } from '../config';
 import * as _ from 'lodash';
+import { getConsisLogger } from '../lib/logger';
 
 const chalk = require('chalk');
 const detectInstalled = require('detect-installed');
@@ -20,7 +21,8 @@ interface InstallResult {
  * @param {*} version 版本
  */
 async function installDep(packageName: string, version: string): Promise<boolean> {
-  console.log(chalk.green(`${packageName}${version ? '@' + version : ''}`));
+  const log = getConsisLogger();
+  log(chalk.green(`${packageName}${version ? `@${version}` : ''}`));
   if (await detectInstalled(packageName, { local: true })) {
     return await upgradePackage(packageName, version);
   } else {

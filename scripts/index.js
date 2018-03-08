@@ -38,38 +38,49 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var installDeps_1 = require("./lib/installDeps");
 var installConfig_1 = require("./lib/installConfig");
 var config_1 = require("./lib/config");
+var logger_1 = require("./lib/logger");
 var ci_1 = require("./lib/ci");
 var chalk = require('chalk');
 module.exports = {
     CiSolution: ci_1.CiSolution,
     init: function (config) {
         return __awaiter(this, void 0, void 0, function () {
-            var projectType, supportTypeScript, ciSolution, sharedEslintConfig;
+            var projectType, supportTypeScript, ciSolution, sharedEslintConfig, silence, log, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        projectType = config.type, supportTypeScript = config.supportTypeScript, ciSolution = config.ciSolution, sharedEslintConfig = config.sharedEslintConfig;
-                        console.log(chalk.green('正在安装 eslint 相关依赖 ...'));
-                        return [4, installDeps_1.default(projectType, supportTypeScript)];
+                        projectType = config.type, supportTypeScript = config.supportTypeScript, ciSolution = config.ciSolution, sharedEslintConfig = config.sharedEslintConfig, silence = config.silence;
+                        log = logger_1.getConsisLogger(silence);
+                        _a.label = 1;
                     case 1:
-                        _a.sent();
-                        console.log(chalk.green('eslint 依赖安装完成'));
-                        console.log(chalk.green('正在配置 eslint...'));
-                        return [4, installConfig_1.default(sharedEslintConfig)];
+                        _a.trys.push([1, 6, , 7]);
+                        log(chalk.green('正在安装 eslint 相关依赖 ...'));
+                        return [4, installDeps_1.default(projectType, supportTypeScript)];
                     case 2:
                         _a.sent();
-                        return [4, config_1.default(projectType, supportTypeScript, sharedEslintConfig)];
+                        log(chalk.green('eslint 依赖安装完成'));
+                        log(chalk.green('正在配置 eslint...'));
+                        return [4, installConfig_1.default(sharedEslintConfig)];
                     case 3:
                         _a.sent();
-                        console.log(chalk.green('eslint 配置完成'));
-                        console.log(chalk.green('正在设置持续集成检查方案'));
-                        console.log(chalk.green('开始配置package.json...'));
-                        return [4, ci_1.interEslintToCI(ciSolution, projectType, supportTypeScript)];
+                        return [4, config_1.default(projectType, supportTypeScript, sharedEslintConfig)];
                     case 4:
                         _a.sent();
-                        console.log(chalk.green('持续集成检查方案配置成功'));
-                        console.log(chalk.green('eslint初始化完成, happy coding~'));
+                        log(chalk.green('eslint 配置完成'));
+                        log(chalk.green('正在设置持续集成检查方案'));
+                        log(chalk.green('开始配置package.json...'));
+                        return [4, ci_1.interEslintToCI(ciSolution, projectType, supportTypeScript)];
+                    case 5:
+                        _a.sent();
+                        log(chalk.green('持续集成检查方案配置成功'));
+                        log(chalk.green('eslint初始化完成, happy coding~'));
                         return [2, true];
+                    case 6:
+                        err_1 = _a.sent();
+                        log(chalk.red('ESLint 配置接入失败'));
+                        log(err_1);
+                        return [2, err_1];
+                    case 7: return [2];
                 }
             });
         });

@@ -2,6 +2,8 @@
  * @description 文件操作 util
  * @author songpeng02
  */
+import { getConsisLogger } from '../lib/logger';
+
 const fs = require('fs');
 const chalk = require('chalk');
 const readline = require('readline');
@@ -67,17 +69,18 @@ function checkExist(filePath: string, askForOverWrite = false) {
  */
 function syncModifyFile(filePath: string, encode = 'utf8', pattern: any, replace: string) {
   let fileContent;
+  const log = getConsisLogger();
   try {
     fileContent = fs.readFileSync(filePath, encode);
   } catch (err) {
-    console.log(chalk.red(`read ${filePath} failed`));
+    log(chalk.red(`read ${filePath} failed`));
     return false;
   }
   const newFileContent = fileContent.replace(pattern, replace);
   try {
     fs.writeFileSync(filePath, newFileContent);
   } catch (err) {
-    console.log(chalk.red(`modify ${filePath} failed`));
+    log(chalk.red(`modify ${filePath} failed`));
     return false;
   }
   return true;

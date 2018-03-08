@@ -39,7 +39,7 @@ exports.DeafultSharedEslintConfig = {
     'eslint-config-mfe': '',
 };
 exports.mfeCiDeps = {
-    '@mfe/precommit-eslint': '1.0.7',
+    '@mfe/precommit-eslint': '1.0.8',
 };
 exports.huskyCiDeps = {
     husky: '0.14.3',

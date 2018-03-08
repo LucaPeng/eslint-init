@@ -40,6 +40,7 @@ var config_1 = require("../config");
 var fs = require("fs");
 var file_1 = require("../utils/file");
 var _ = require("lodash");
+var logger_1 = require("../lib/logger");
 var chalk = require('chalk');
 var CiSolution;
 (function (CiSolution) {
@@ -67,7 +68,7 @@ function installDeps(deps) {
                     _a[_b] = _c.sent();
                     _c.label = 3;
                 case 3:
-                    i++;
+                    i += 1;
                     return [3, 1];
                 case 4: return [2];
             }
@@ -91,8 +92,9 @@ function configPackage(eslintPath) {
         console.log(chalk.bgYellow("\u5F53\u524Dlint\u6587\u4EF6\u4E3A\"" + eslintPath + "\",\u53EF\u6839\u636E\u9879\u76EE\u5177\u4F53\u60C5\u51B5\u8C03\u6574(\u89C1package.json)"));
     }
     else {
-        console.log(chalk.red('ERROR: 未找到package.json文件，请使用 npm init 进行初始化'));
-        process.exit(1);
+        var log = logger_1.getConsisLogger();
+        log(chalk.red('ERROR: 未找到package.json文件，请使用 npm init 进行初始化'));
+        throw (new Error('package.json not found'));
     }
     var _a;
 }

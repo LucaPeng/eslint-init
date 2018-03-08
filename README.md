@@ -32,6 +32,10 @@ proceed
 ```
   eslint-init --node
 ```
-under your project path; and use --react --vue --es6 for the types
+under your project path;
 
-defaultly use husky as ci solution
+Please use --react --vue --es6 to specify the type,
+
+and add `--ts` param in command to support ts, add `--silence` to be silence.
+
+what's more, defaultly use husky as ci solution.

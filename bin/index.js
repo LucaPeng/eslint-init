@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --harmony
 
 const params = process.argv.slice(2);
 let index = 0;
@@ -20,9 +20,16 @@ var projectTypeMap = {
   '--es6': 'es6'
 };
 
+let typescript = false;
+let silence = false;
+
 for(;index < params.length; index++) {
   var param = params[index];
-  if(projectTypeMap[param]) {
+  if (param === '--ts' || param === '--typescript') {
+    typescript = true;
+  } else if (param === '--silence') {
+    silence = true;
+  } else if(projectTypeMap[param]) {
     if (projectType) {
       console.log('project type must be single, es6、vue、react、nodejs are supported');
     } else {
@@ -34,5 +41,7 @@ for(;index < params.length; index++) {
 projectType = projectType || 'es6';
 initer.init({
   type: projectType,
-  ciSolution: initer.CiSolution.husky
+  ciSolution: initer.CiSolution.husky,
+  supportTypeScript: typescript,
+  silence: silence,
 });

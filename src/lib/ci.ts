@@ -8,6 +8,7 @@ import { DepConfig, mfeCiDeps, huskyCiDeps } from '../config';
 import * as fs from 'fs';
 import fileUtil from '../utils/file';
 import * as _ from 'lodash';
+import { getConsisLogger } from '../lib/logger';
 
 const chalk = require('chalk');
 
@@ -22,11 +23,9 @@ export enum CiSolution {
  * @param deps 依赖信息
  */
 async function installDeps(deps: DepConfig) {
-  const result: {
-    [index: string]: boolean
-  } = {};
+  const result: { [index: string]: boolean } = {};
   const keys = Object.keys(deps);
-  for (let i = 0; i < keys.length; i++) {
+  for (let i = 0; i < keys.length; i += 1) {
     const dep = keys[i];
     result[dep] = await installPackage(dep, deps[dep]);
   }
@@ -57,8 +56,9 @@ function configPackage(eslintPath: string) {
     console.log(chalk.bgYellow(`当前lint文件为"${eslintPath}",可根据项目具体情况调整(见package.json)`));
   } else {
     // 如果 package.json 不存在，初始化失败，提示用户进行 npm 初始化
-    console.log(chalk.red('ERROR: 未找到package.json文件，请使用 npm init 进行初始化'));
-    process.exit(1);
+    const log = getConsisLogger();
+    log(chalk.red('ERROR: 未找到package.json文件，请使用 npm init 进行初始化'));
+    throw (new Error('package.json not found'));
   }
 }
 

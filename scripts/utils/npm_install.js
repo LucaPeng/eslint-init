@@ -37,9 +37,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var pm_tool_1 = require("./pm_tool");
 var shell = require("shelljs");
+var logger_1 = require("../lib/logger");
 function installPackage(packageName, version) {
     return __awaiter(this, void 0, void 0, function () {
-        var pmToolName, packageStr;
+        var pmToolName, packageStr, log;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4, pm_tool_1.default(packageName)];
@@ -55,7 +56,8 @@ function installPackage(packageName, version) {
                         }
                     }
                     catch (e) {
-                        console.log(e);
+                        log = logger_1.getConsisLogger();
+                        log(e);
                         return [2, false];
                     }
                     return [2, true];
@@ -66,7 +68,7 @@ function installPackage(packageName, version) {
 exports.installPackage = installPackage;
 function upgradePackage(packageName, version) {
     return __awaiter(this, void 0, void 0, function () {
-        var pmToolName, packageStr;
+        var pmToolName, packageStr, log;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4, pm_tool_1.default(packageName)];
@@ -87,7 +89,8 @@ function upgradePackage(packageName, version) {
                         }
                     }
                     catch (e) {
-                        console.log(e);
+                        log = logger_1.getConsisLogger();
+                        log(e);
                         return [2, false];
                     }
                     return [2, true];

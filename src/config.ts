@@ -50,9 +50,8 @@ export const DeafultSharedEslintConfig: DepConfig = {
   'eslint-config-mfe': '',
 };
 
-// TODO: use 1.0.8 after published
 export const mfeCiDeps: DepConfig = {
-  '@mfe/precommit-eslint': '1.0.7',
+  '@mfe/precommit-eslint': '1.0.8',
 };
 
 export const huskyCiDeps: DepConfig = {

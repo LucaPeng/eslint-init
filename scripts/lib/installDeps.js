@@ -38,14 +38,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var npm_install_1 = require("../utils/npm_install");
 var config_1 = require("../config");
 var _ = require("lodash");
+var logger_1 = require("../lib/logger");
 var chalk = require('chalk');
 var detectInstalled = require('detect-installed');
 function installDep(packageName, version) {
     return __awaiter(this, void 0, void 0, function () {
+        var log;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log(chalk.green("" + packageName + (version ? '@' + version : '')));
+                    log = logger_1.getConsisLogger();
+                    log(chalk.green("" + packageName + (version ? "@" + version : '')));
                     return [4, detectInstalled(packageName, { local: true })];
                 case 1:
                     if (!_a.sent()) return [3, 3];
