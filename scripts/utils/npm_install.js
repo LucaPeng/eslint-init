@@ -38,6 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var pm_tool_1 = require("./pm_tool");
 var shell = require("shelljs");
 var logger_1 = require("../lib/logger");
+var context_1 = require("../lib/context");
 function installPackage(packageName, version) {
     return __awaiter(this, void 0, void 0, function () {
         var pmToolName, packageStr, log;
@@ -49,10 +50,10 @@ function installPackage(packageName, version) {
                     packageStr = "" + packageName + (version ? "@" + version : '@latest');
                     try {
                         if (pmToolName === 'yarn') {
-                            shell.exec("yarn add " + packageStr + " --dev", { silent: false });
+                            shell.exec("yarn add " + packageStr + " --dev", { silent: context_1.default.silent });
                         }
                         else {
-                            shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: false });
+                            shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: context_1.default.silent });
                         }
                     }
                     catch (e) {
@@ -77,14 +78,14 @@ function upgradePackage(packageName, version) {
                     packageStr = "" + packageName + (version ? "@" + version : '');
                     try {
                         if (pmToolName === 'yarn') {
-                            shell.exec("yarn upgrade " + packageStr + " --dev", { silent: false });
+                            shell.exec("yarn upgrade " + packageStr + " --dev", { silent: context_1.default.silent });
                         }
                         else {
                             if (version) {
-                                shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: false });
+                                shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: context_1.default.silent });
                             }
                             else {
-                                shell.exec(pmToolName + " update " + packageStr, { silent: false });
+                                shell.exec(pmToolName + " update " + packageStr, { silent: context_1.default.silent });
                             }
                         }
                     }

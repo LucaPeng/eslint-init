@@ -1,6 +1,7 @@
 import installDeps from './lib/installDeps';
 import installConfig from './lib/installConfig';
 import configEslint from './lib/config';
+import context from './lib/context';
 import { getConsisLogger } from './lib/logger';
 import { CiSolution, interEslintToCI } from './lib/ci';
 import { DepConfig } from './config';
@@ -12,7 +13,7 @@ interface EslintConfig {
   type: string;
   supportTypeScript: boolean;
   ciSolution: CiSolution;
-  silence?: boolean;
+  silent?: boolean;
   sharedEslintConfig?: DepConfig;
 }
 
@@ -24,9 +25,10 @@ module.exports = {
       supportTypeScript,
       ciSolution,
       sharedEslintConfig,
-      silence,
+      silent,
     } = config;
-    const log = getConsisLogger(silence);
+    context.silent = silent || false;
+    const log = getConsisLogger(silent);
     try {
       // 安装相关依赖
       log(chalk.green('正在安装 eslint 相关依赖 ...'));

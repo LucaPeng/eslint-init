@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logger = function (silence) { return function (content) {
-    if (!silence && content) {
+exports.logger = function (silent) { return function (content) {
+    if (!silent && content) {
         console.log(content);
     }
 }; };
 var consisLogger;
-exports.getConsisLogger = function (silence) {
-    if (silence === void 0) { silence = false; }
+exports.getConsisLogger = function (silent) {
+    if (silent === void 0) { silent = false; }
     if (!consisLogger) {
-        consisLogger = exports.logger(silence);
+        consisLogger = exports.logger(silent);
     }
     return consisLogger;
 };

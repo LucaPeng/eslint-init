@@ -21,14 +21,14 @@ var projectTypeMap = {
 };
 
 let typescript = false;
-let silence = false;
+let silent = false;
 
 for(;index < params.length; index++) {
   var param = params[index];
   if (param === '--ts' || param === '--typescript') {
     typescript = true;
-  } else if (param === '--silence') {
-    silence = true;
+  } else if (param === '--silent') {
+    silent = true;
   } else if(projectTypeMap[param]) {
     if (projectType) {
       console.log('project type must be single, es6、vue、react、nodejs are supported');
@@ -43,5 +43,5 @@ initer.init({
   type: projectType,
   ciSolution: initer.CiSolution.husky,
   supportTypeScript: typescript,
-  silence: silence,
+  silent: silent,
 });

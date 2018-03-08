@@ -36,6 +36,6 @@ under your project path;
 
 Please use --react --vue --es6 to specify the type,
 
-and add `--ts` param in command to support ts, add `--silence` to be silence.
+and add `--ts` param in command to support ts, add `--silent` to be silent.
 
 what's more, defaultly use husky as ci solution.

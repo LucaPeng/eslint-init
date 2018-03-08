@@ -7,14 +7,15 @@ export enum CiSolution {
 }
 
 export interface DepConfig {
-  [index: string]: string
+  [index: string]: string;
 }
 
 export interface EslintConfig {
-  type: string,
-  supportTypeScript: boolean,
-  ciSolution: CiSolution,
-  sharedEslintConfig?: DepConfig
+  type: string;
+  supportTypeScript: boolean;
+  ciSolution: CiSolution;
+  silent?: boolean;
+  sharedEslintConfig?: DepConfig;
 }
 
-export function init(config: EslintConfig): Promise <boolean>
+export function init(config: EslintConfig): Promise <boolean>;

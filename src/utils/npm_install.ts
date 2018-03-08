@@ -6,6 +6,7 @@
 import pmTool from './pm_tool';
 import * as shell from 'shelljs';
 import { getConsisLogger } from '../lib/logger';
+import context from '../lib/context';
 
 /**
  * 安装npm包
@@ -17,9 +18,9 @@ export async function installPackage(packageName: string, version?: string) {
   const packageStr = `${packageName}${version ? `@${version}` : '@latest'}`;
   try {
     if (pmToolName === 'yarn') {
-      shell.exec(`yarn add ${packageStr} --dev`, { silent: false });
+      shell.exec(`yarn add ${packageStr} --dev`, { silent: context.silent });
     } else {
-      shell.exec(`${pmToolName} install ${packageStr} --save-dev --save-exact`, { silent: false });
+      shell.exec(`${pmToolName} install ${packageStr} --save-dev --save-exact`, { silent: context.silent });
     }
   } catch (e) {
     const log = getConsisLogger();
@@ -39,12 +40,12 @@ export async function upgradePackage(packageName: string, version?: string) {
   const packageStr = `${packageName}${version ? `@${version}` : ''}`;
   try {
     if (pmToolName === 'yarn') {
-      shell.exec(`yarn upgrade ${packageStr} --dev`, { silent: false });
+      shell.exec(`yarn upgrade ${packageStr} --dev`, { silent: context.silent });
     } else {
       if (version) {
-        shell.exec(`${pmToolName} install ${packageStr} --save-dev --save-exact`, { silent: false });
+        shell.exec(`${pmToolName} install ${packageStr} --save-dev --save-exact`, { silent: context.silent });
       } else {
-        shell.exec(`${pmToolName} update ${packageStr}`, { silent: false });
+        shell.exec(`${pmToolName} update ${packageStr}`, { silent: context.silent });
       }
     }
   } catch (e) {

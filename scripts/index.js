@@ -38,6 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var installDeps_1 = require("./lib/installDeps");
 var installConfig_1 = require("./lib/installConfig");
 var config_1 = require("./lib/config");
+var context_1 = require("./lib/context");
 var logger_1 = require("./lib/logger");
 var ci_1 = require("./lib/ci");
 var chalk = require('chalk');
@@ -45,12 +46,13 @@ module.exports = {
     CiSolution: ci_1.CiSolution,
     init: function (config) {
         return __awaiter(this, void 0, void 0, function () {
-            var projectType, supportTypeScript, ciSolution, sharedEslintConfig, silence, log, err_1;
+            var projectType, supportTypeScript, ciSolution, sharedEslintConfig, silent, log, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        projectType = config.type, supportTypeScript = config.supportTypeScript, ciSolution = config.ciSolution, sharedEslintConfig = config.sharedEslintConfig, silence = config.silence;
-                        log = logger_1.getConsisLogger(silence);
+                        projectType = config.type, supportTypeScript = config.supportTypeScript, ciSolution = config.ciSolution, sharedEslintConfig = config.sharedEslintConfig, silent = config.silent;
+                        context_1.default.silent = silent || false;
+                        log = logger_1.getConsisLogger(silent);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 6, , 7]);
