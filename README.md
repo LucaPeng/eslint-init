@@ -2,7 +2,7 @@
 
 Fast & simple integrate eslint into your project and your git flow.
 
-Support es6, node, react, and vue project.
+Support es6, node, react, vue project, and typescript.
 
 ## Installament & Usage
 
@@ -17,9 +17,25 @@ use
   const eslintInit = require('eslint-init');
   eslintInit({
     type: 'node',
+    silent: false,
+    supportTypeScript: false,
     ciSolution: eslintInit.CiSolution.husky
   });
 ```
+
+you can use the sharable eslint config maintained by yourself, use the sharedEslintConfig like: 
+
+```
+  eslintInit({
+    type: 'node',
+    ciSolution: eslintInit.CiSolution.husky,
+    sharedEslintConfig: {
+      'eslint-config-mfe': '0.0.7'
+    }
+  });
+```
+
+Only need to make sure it has same structure with [eslint-config-mfe]() to make the generated eslintrc config effective!!!
 
 ## CLI
 
