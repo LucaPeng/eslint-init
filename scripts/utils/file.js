@@ -57,17 +57,23 @@ function syncModifyFile(filePath, encode, pattern, replace) {
     }
     catch (err) {
         log(chalk.red("read " + filePath + " failed"));
-        return false;
+        return -1;
     }
-    var newFileContent = fileContent.replace(pattern, replace);
+    var newFileContent;
+    if (fileContent && fileContent.match(pattern)) {
+        newFileContent = fileContent.replace(pattern, replace);
+    }
+    else {
+        return 0;
+    }
     try {
         fs.writeFileSync(filePath, newFileContent);
     }
     catch (err) {
         log(chalk.red("modify " + filePath + " failed"));
-        return false;
+        return -1;
     }
-    return true;
+    return 1;
 }
 exports.default = {
     hasFile: hasFile,

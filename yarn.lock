@@ -429,9 +429,9 @@ eslint-config-airbnb-base@12.1.0:
   dependencies:
     eslint-restricted-globals "^0.1.1"
 
-eslint-config-mfe@^0.0.7:
-  version "0.0.7"
-  resolved "http://r.npm.sankuai.com/eslint-config-mfe/download/eslint-config-mfe-0.0.7.tgz#947219b9ca235c239d22b141e8a4b4c4470b13a4"
+eslint-config-mfe@^0.0.8:
+  version "0.0.8"
+  resolved "http://r.npm.sankuai.com/eslint-config-mfe/download/eslint-config-mfe-0.0.8.tgz#ea88bbd49a55974cff7f38b60f05695e6614ed5f"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"

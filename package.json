@@ -1,6 +1,6 @@
 {
   "name": "eslint-init",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "integrate eslint to a fe project",
   "main": "scripts/index.js",
   "scripts": {
@@ -39,7 +39,7 @@
     "babel-eslint": "8.2.1",
     "eslint": "4.17.0",
     "eslint-config-airbnb-base": "12.1.0",
-    "eslint-config-mfe": "^0.0.7",
+    "eslint-config-mfe": "^0.0.8",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-node": "6.0.0",
     "eslint-plugin-typescript": "0.8.1",

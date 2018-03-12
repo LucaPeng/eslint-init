@@ -65,7 +65,7 @@ function checkExist(filePath: string, askForOverWrite = false) {
  * @param {String} encode 文件读取&写入编码方式 默认utf-8
  * @param {Regexp} pattern 修改部分匹配正则
  * @param {String} replace 被替换的内容
- * @return {Boolean} 替换结果，true为成功，false为失败
+ * @return {Number} 替换结果，1为成功，-1为失败, 0为未发生替换
  */
 function syncModifyFile(filePath: string, encode = 'utf8', pattern: any, replace: string) {
   let fileContent;
@@ -74,16 +74,21 @@ function syncModifyFile(filePath: string, encode = 'utf8', pattern: any, replace
     fileContent = fs.readFileSync(filePath, encode);
   } catch (err) {
     log(chalk.red(`read ${filePath} failed`));
-    return false;
+    return -1;
   }
-  const newFileContent = fileContent.replace(pattern, replace);
+  let newFileContent;
+  if (fileContent && fileContent.match(pattern)) {
+    newFileContent = fileContent.replace(pattern, replace);
+  } else {
+    return 0;
+  }
   try {
     fs.writeFileSync(filePath, newFileContent);
   } catch (err) {
     log(chalk.red(`modify ${filePath} failed`));
-    return false;
+    return -1;
   }
-  return true;
+  return 1;
 }
 
 export default {

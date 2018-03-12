@@ -38,7 +38,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var question_1 = require("../utils/question");
 var file_1 = require("../utils/file");
 var config_1 = require("../config");
-var _ = require("lodash");
 var logger_1 = require("./logger");
 var chalk = require('chalk');
 var fs = require('fs');
@@ -57,7 +56,7 @@ function getEslintExtendsConfig(packageName, projectType, supportTypeScript) {
 }
 function configEslintRC(projectType, supportTypeScript, sharedEslintConfig) {
     return __awaiter(this, void 0, void 0, function () {
-        var eslintRcPath, exsit, configDep, packageName, eslintConfigPath, log, eslintConfigContent, eslintRcOld, oldExsit, choice, fileContent, fileJSON, newFileJSON, choiceToDeleteOldRules, newFileContent;
+        var eslintRcPath, exsit, configDep, packageName, eslintConfigPath, log, eslintConfigContent;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -74,58 +73,37 @@ function configEslintRC(projectType, supportTypeScript, sharedEslintConfig) {
                     return [4, question_1.default('eslint配置文件已存在，是否要增加团队标准配置扩展(Y/n)').then(function (ans) {
                             if (ans !== 'n') {
                                 log(chalk.green('更新当前 eslintrc.js 配置文件，增加 extend...'));
-                                var modifyResult = file_1.default.syncModifyFile(eslintRcPath, 'utf-8', /(?<=extends:\s)('[^']+'|\[[^]+?\])/, eslintConfigPath);
-                                if (modifyResult === true) {
+                                var modifyResult = file_1.default.syncModifyFile(eslintRcPath, 'utf-8', /(?<=["']?extends["']?:\s)('[^']+?'|"[^"]+?"|\[[^]+?\])/, eslintConfigPath);
+                                if (modifyResult === 1) {
                                     log(chalk.green('eslintrc.js 配置文件更新完成'));
+                                }
+                                else if (modifyResult === 0) {
+                                    var addExtendsResult = file_1.default.syncModifyFile(eslintRcPath, 'utf-8', /(?<=module.exports[\s]?=[\s]?{)/, "\n  extends: " + eslintConfigPath + ",");
+                                    if (addExtendsResult === 1) {
+                                        log(chalk.green('eslintrc.js 配置文件更新完成'));
+                                    }
+                                    else {
+                                        log(chalk.red('eslintrc.js 配置文件更新失败，请查看具体的错误信息'));
+                                        throw (new Error('fail to update eslintrc.js'));
+                                    }
                                 }
                                 else {
                                     log(chalk.red('eslintrc.js 配置文件更新失败，请查看具体的错误信息'));
-                                    throw (new Error('failt to update eslintrc.js'));
+                                    throw (new Error('fail to update eslintrc.js'));
                                 }
                             }
                         })];
                 case 2:
                     _a.sent();
-                    return [3, 11];
+                    return [3, 4];
                 case 3:
-                    eslintRcOld = process.cwd() + "/.eslintrc";
-                    return [4, file_1.default.checkExist(eslintRcOld, false)];
-                case 4:
-                    oldExsit = _a.sent();
-                    if (!oldExsit) return [3, 10];
-                    return [4, question_1.default('检查到已废弃的配置方式 .eslintrc, 是否升级为 .eslintrc.js, 原有配置会被迁移(Y/n)')];
-                case 5:
-                    choice = _a.sent();
-                    if (!(choice !== 'n')) return [3, 8];
-                    fileContent = fs.readFileSync(eslintRcOld, 'utf-8');
-                    fileJSON = JSON.parse(fileContent);
-                    newFileJSON = _.assign({
-                        extends: eslintConfigPath,
-                    }, fileJSON);
-                    if (!(newFileJSON && newFileJSON.rules)) return [3, 7];
-                    return [4, question_1.default('检测到存在已有的 eslint 规则，是否保留Y/n?')];
-                case 6:
-                    choiceToDeleteOldRules = _a.sent();
-                    if (choiceToDeleteOldRules === 'n') {
-                        delete newFileJSON.rules;
-                    }
-                    _a.label = 7;
-                case 7:
-                    newFileContent = "module.exports = " + JSON.stringify(newFileJSON, null, 2) + ";\n";
-                    fs.writeFileSync(eslintRcPath, newFileContent);
-                    log(chalk.green('eslint 配置升级并更新完成，please check for sure'));
-                    return [3, 9];
-                case 8:
-                    console.log(chalk.red('放弃升级eslint配置，请手动进行eslint配置'));
-                    _a.label = 9;
-                case 9: return [3, 11];
-                case 10:
-                    log(chalk.green('检测到该项目尚无 eslint 配置文件'));
-                    log(chalk.green('复制标准 eslintrc 配置模板到项目空间...'));
+                    log(chalk.green('检测到该项目尚无 eslintrc.js 配置文件'));
+                    log(chalk.green('复制标准 eslintrc.js 配置模板到项目空间...'));
                     fs.writeFileSync(process.cwd() + "/.eslintrc.js", eslintConfigContent, 'utf-8');
                     log(chalk.green('eslint配置完成'));
-                    _a.label = 11;
-                case 11: return [2];
+                    log(chalk.bkGreen('如果该项目中已经存在 eslintrc.js 之外的其他eslint配置文件，可以删除~'));
+                    _a.label = 4;
+                case 4: return [2];
             }
         });
     });
