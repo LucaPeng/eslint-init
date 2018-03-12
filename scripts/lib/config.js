@@ -101,7 +101,7 @@ function configEslintRC(projectType, supportTypeScript, sharedEslintConfig) {
                     log(chalk.green('复制标准 eslintrc.js 配置模板到项目空间...'));
                     fs.writeFileSync(process.cwd() + "/.eslintrc.js", eslintConfigContent, 'utf-8');
                     log(chalk.green('eslint配置完成'));
-                    log(chalk.bkGreen('如果该项目中已经存在 eslintrc.js 之外的其他eslint配置文件，可以删除~'));
+                    log(chalk.bgGreen('如果该项目中已经存在 eslintrc.js 之外的其他eslint配置文件，可以删除~'));
                     _a.label = 4;
                 case 4: return [2];
             }
