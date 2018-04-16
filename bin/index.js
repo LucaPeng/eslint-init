@@ -14,6 +14,7 @@ if (params[0] == 'init' || params[0] == 'update') {
 }
 
 var projectTypeMap = {
+  '--react-native': 'react-native',
   '--react': 'react',
   '--vue': 'vue',
   '--node': 'node',
@@ -31,7 +32,7 @@ for(;index < params.length; index++) {
     silent = true;
   } else if(projectTypeMap[param]) {
     if (projectType) {
-      console.log('project type must be single, es6、vue、react、nodejs are supported');
+      console.log('project type must be single, es6、vue、react、react-native、nodejs are supported');
     } else {
       projectType = projectTypeMap[param];
     }

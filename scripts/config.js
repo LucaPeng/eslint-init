@@ -8,6 +8,9 @@ exports.pluginDeps = {
     'base-es6': {
         'eslint-plugin-import': '2.8.0',
     },
+    es6: {
+        'eslint-plugin-import': '2.8.0',
+    },
     vue: {
         'eslint-plugin-import': '2.8.0',
         'eslint-plugin-vue': '4.2.2',
@@ -18,6 +21,12 @@ exports.pluginDeps = {
         'eslint-plugin-react': '7.6.1',
         'eslint-plugin-jsx-a11y': '6.0.3',
     },
+    'react-native': {
+        'eslint-plugin-import': '2.8.0',
+        'eslint-plugin-react': '7.6.1',
+        'eslint-plugin-jsx-a11y': '6.0.3',
+        'eslint-plugin-react-native': '3.2.1',
+    },
     node: {
         'eslint-plugin-import': '2.8.0',
         'eslint-plugin-node': '6.0.0',
@@ -25,6 +34,9 @@ exports.pluginDeps = {
 };
 exports.configDeps = {
     react: {
+        'eslint-config-airbnb': '16.1.0',
+    },
+    'react-native': {
         'eslint-config-airbnb': '16.1.0',
     },
     default: {
