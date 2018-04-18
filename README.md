@@ -37,6 +37,16 @@ you can use the sharable eslint config maintained by yourself, use the sharedEsl
 
 Only need to make sure it has same structure with [eslint-config-mfe](https://www.npmjs.com/package/eslint-config-mfe) to make the generated eslintrc config effective!!!
 
+you can use the package management tool you want, like npm、cnpm、yarn。
+
+add pmTool to config, like 
+
+```
+{
+  pmTool: 'yarn'
+}
+```
+
 ## CLI
 
 install globally
