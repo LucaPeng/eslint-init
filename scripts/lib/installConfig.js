@@ -40,7 +40,7 @@ var npm_install_1 = require("../utils/npm_install");
 var config_1 = require("../config");
 var logger_1 = require("../lib/logger");
 var chalk = require('chalk');
-var installConfig = function (sharedEslintConfig) { return __awaiter(_this, void 0, void 0, function () {
+var installConfig = function (sharedEslintConfig, pmTool) { return __awaiter(_this, void 0, void 0, function () {
     var log, configDep, packageName, version, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -50,7 +50,7 @@ var installConfig = function (sharedEslintConfig) { return __awaiter(_this, void
                 configDep = sharedEslintConfig || config_1.DeafultSharedEslintConfig;
                 packageName = Object.keys(configDep)[0];
                 version = configDep[packageName];
-                return [4, npm_install_1.installPackage(packageName, version)];
+                return [4, npm_install_1.installPackage(packageName, version, pmTool)];
             case 1:
                 result = _a.sent();
                 log(chalk.green('eslint 配置集安装完成'));

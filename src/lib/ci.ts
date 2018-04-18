@@ -22,12 +22,12 @@ export enum CiSolution {
  * 安装所需依赖
  * @param deps 依赖信息
  */
-async function installDeps(deps: DepConfig) {
+async function installDeps(deps: DepConfig, pmTool?: string) {
   const result: { [index: string]: boolean } = {};
   const keys = Object.keys(deps);
   for (let i = 0; i < keys.length; i += 1) {
     const dep = keys[i];
-    result[dep] = await installPackage(dep, deps[dep]);
+    result[dep] = await installPackage(dep, deps[dep], pmTool);
   }
 }
 
@@ -67,11 +67,11 @@ function configPackage(eslintPath: string) {
  * @param solutionType 解决方案类型
  * @param projectType 项目类型
  */
-export async function interEslintToCI(solutionType: CiSolution, projectType: string, supportTypeScript: boolean) {
+export async function interEslintToCI(solutionType: CiSolution, projectType: string, supportTypeScript: boolean, pmTool?: string) {
   if (solutionType === CiSolution.mfe) {
-    await installDeps(mfeCiDeps);
+    await installDeps(mfeCiDeps, pmTool);
   } else {
-    await installDeps(huskyCiDeps);
+    await installDeps(huskyCiDeps, pmTool);
     const suffix = ['js'];
     if (projectType === 'vue') {
       suffix.push('vue');

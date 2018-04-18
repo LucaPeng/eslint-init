@@ -41,7 +41,7 @@ var _ = require("lodash");
 var logger_1 = require("../lib/logger");
 var chalk = require('chalk');
 var detectInstalled = require('detect-installed');
-function installDep(packageName, version) {
+function installDep(packageName, version, pmTool) {
     return __awaiter(this, void 0, void 0, function () {
         var log;
         return __generator(this, function (_a) {
@@ -52,15 +52,15 @@ function installDep(packageName, version) {
                     return [4, detectInstalled(packageName, { local: true })];
                 case 1:
                     if (!_a.sent()) return [3, 3];
-                    return [4, npm_install_1.upgradePackage(packageName, version)];
+                    return [4, npm_install_1.upgradePackage(packageName, version, pmTool)];
                 case 2: return [2, _a.sent()];
-                case 3: return [4, npm_install_1.installPackage(packageName, version)];
+                case 3: return [4, npm_install_1.installPackage(packageName, version, pmTool)];
                 case 4: return [2, _a.sent()];
             }
         });
     });
 }
-function installDepList(deps) {
+function installDepList(deps, pmTool) {
     return __awaiter(this, void 0, void 0, function () {
         var result, keys, i, dep, _a, _b;
         return __generator(this, function (_c) {
@@ -75,7 +75,7 @@ function installDepList(deps) {
                     dep = keys[i];
                     _a = result;
                     _b = dep;
-                    return [4, installDep(dep, deps[dep])];
+                    return [4, installDep(dep, deps[dep], pmTool)];
                 case 2:
                     _a[_b] = _c.sent();
                     _c.label = 3;
@@ -87,26 +87,26 @@ function installDepList(deps) {
         });
     });
 }
-function installDeps(projectType, supportTypeScript) {
+function installDeps(projectType, supportTypeScript, pmTool) {
     return __awaiter(this, void 0, void 0, function () {
         var commonResult, pluginResult, configResult, tsResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4, installDepList(config_1.commonDeps)];
+                case 0: return [4, installDepList(config_1.commonDeps, pmTool)];
                 case 1:
                     commonResult = _a.sent();
                     pluginResult = {};
                     if (!config_1.pluginDeps[projectType]) return [3, 3];
-                    return [4, installDepList(config_1.pluginDeps[projectType])];
+                    return [4, installDepList(config_1.pluginDeps[projectType], pmTool)];
                 case 2:
                     pluginResult = _a.sent();
                     _a.label = 3;
-                case 3: return [4, installDepList(config_1.configDeps[projectType] || config_1.configDeps.default)];
+                case 3: return [4, installDepList(config_1.configDeps[projectType] || config_1.configDeps.default, pmTool)];
                 case 4:
                     configResult = _a.sent();
                     tsResult = {};
                     if (!supportTypeScript) return [3, 6];
-                    return [4, installDepList(config_1.tsDeps)];
+                    return [4, installDepList(config_1.tsDeps, pmTool)];
                 case 5:
                     tsResult = _a.sent();
                     _a.label = 6;

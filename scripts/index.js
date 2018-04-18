@@ -46,23 +46,23 @@ module.exports = {
     CiSolution: ci_1.CiSolution,
     init: function (config) {
         return __awaiter(this, void 0, void 0, function () {
-            var projectType, supportTypeScript, ciSolution, sharedEslintConfig, silent, log, err_1;
+            var projectType, supportTypeScript, ciSolution, sharedEslintConfig, silent, pmTool, log, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        projectType = config.type, supportTypeScript = config.supportTypeScript, ciSolution = config.ciSolution, sharedEslintConfig = config.sharedEslintConfig, silent = config.silent;
+                        projectType = config.type, supportTypeScript = config.supportTypeScript, ciSolution = config.ciSolution, sharedEslintConfig = config.sharedEslintConfig, silent = config.silent, pmTool = config.pmTool;
                         context_1.default.silent = silent || false;
                         log = logger_1.getConsisLogger(silent);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 6, , 7]);
                         log(chalk.green('正在安装 eslint 相关依赖 ...'));
-                        return [4, installDeps_1.default(projectType, supportTypeScript)];
+                        return [4, installDeps_1.default(projectType, supportTypeScript, pmTool)];
                     case 2:
                         _a.sent();
                         log(chalk.green('eslint 依赖安装完成'));
                         log(chalk.green('正在配置 eslint...'));
-                        return [4, installConfig_1.default(sharedEslintConfig)];
+                        return [4, installConfig_1.default(sharedEslintConfig, pmTool)];
                     case 3:
                         _a.sent();
                         return [4, config_1.default(projectType, supportTypeScript, sharedEslintConfig)];
@@ -71,7 +71,7 @@ module.exports = {
                         log(chalk.green('eslint 配置完成'));
                         log(chalk.green('正在设置持续集成检查方案'));
                         log(chalk.green('开始配置package.json...'));
-                        return [4, ci_1.interEslintToCI(ciSolution, projectType, supportTypeScript)];
+                        return [4, ci_1.interEslintToCI(ciSolution, projectType, supportTypeScript, pmTool)];
                     case 5:
                         _a.sent();
                         log(chalk.green('持续集成检查方案配置成功'));

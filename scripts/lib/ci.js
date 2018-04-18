@@ -48,7 +48,7 @@ var CiSolution;
     CiSolution[CiSolution["husky"] = 2] = "husky";
     CiSolution[CiSolution["mfe"] = 3] = "mfe";
 })(CiSolution = exports.CiSolution || (exports.CiSolution = {}));
-function installDeps(deps) {
+function installDeps(deps, pmTool) {
     return __awaiter(this, void 0, void 0, function () {
         var result, keys, i, dep, _a, _b;
         return __generator(this, function (_c) {
@@ -63,7 +63,7 @@ function installDeps(deps) {
                     dep = keys[i];
                     _a = result;
                     _b = dep;
-                    return [4, npm_install_1.installPackage(dep, deps[dep])];
+                    return [4, npm_install_1.installPackage(dep, deps[dep], pmTool)];
                 case 2:
                     _a[_b] = _c.sent();
                     _c.label = 3;
@@ -98,18 +98,18 @@ function configPackage(eslintPath) {
     }
     var _a;
 }
-function interEslintToCI(solutionType, projectType, supportTypeScript) {
+function interEslintToCI(solutionType, projectType, supportTypeScript, pmTool) {
     return __awaiter(this, void 0, void 0, function () {
         var suffix, eslintPath;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     if (!(solutionType === CiSolution.mfe)) return [3, 2];
-                    return [4, installDeps(config_1.mfeCiDeps)];
+                    return [4, installDeps(config_1.mfeCiDeps, pmTool)];
                 case 1:
                     _a.sent();
                     return [3, 4];
-                case 2: return [4, installDeps(config_1.huskyCiDeps)];
+                case 2: return [4, installDeps(config_1.huskyCiDeps, pmTool)];
                 case 3:
                     _a.sent();
                     suffix = ['js'];

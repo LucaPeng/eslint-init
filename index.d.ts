@@ -16,6 +16,7 @@ export interface EslintConfig {
   ciSolution: CiSolution;
   silent?: boolean;
   sharedEslintConfig?: DepConfig;
+  pmTool?: string;
 }
 
 export function init(config: EslintConfig): Promise <boolean>;

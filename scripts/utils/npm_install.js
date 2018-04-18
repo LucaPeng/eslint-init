@@ -39,21 +39,28 @@ var pm_tool_1 = require("./pm_tool");
 var shell = require("shelljs");
 var logger_1 = require("../lib/logger");
 var context_1 = require("../lib/context");
-function installPackage(packageName, version) {
+function installPackage(packageName, version, assigNpmTool) {
     return __awaiter(this, void 0, void 0, function () {
-        var pmToolName, packageStr, log;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, pm_tool_1.default(packageName)];
+        var pmToolName, _a, packageStr, log;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _a = assigNpmTool;
+                    if (_a) return [3, 2];
+                    return [4, pm_tool_1.default(packageName)];
                 case 1:
-                    pmToolName = _a.sent();
+                    _a = (_b.sent());
+                    _b.label = 2;
+                case 2:
+                    pmToolName = _a;
                     packageStr = "" + packageName + (version ? "@" + version : '@latest');
                     try {
                         if (pmToolName === 'yarn') {
                             shell.exec("yarn add " + packageStr + " --dev", { silent: context_1.default.silent });
                         }
                         else {
-                            shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: context_1.default.silent });
+                            console.log(pmToolName + " install " + packageStr);
+                            shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact --registry http://r.npm.sankuai.com", { silent: context_1.default.silent });
                         }
                     }
                     catch (e) {
@@ -67,14 +74,20 @@ function installPackage(packageName, version) {
     });
 }
 exports.installPackage = installPackage;
-function upgradePackage(packageName, version) {
+function upgradePackage(packageName, version, assigNpmTool) {
     return __awaiter(this, void 0, void 0, function () {
-        var pmToolName, packageStr, log;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, pm_tool_1.default(packageName)];
+        var pmToolName, _a, packageStr, log;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _a = assigNpmTool;
+                    if (_a) return [3, 2];
+                    return [4, pm_tool_1.default(packageName)];
                 case 1:
-                    pmToolName = _a.sent();
+                    _a = (_b.sent());
+                    _b.label = 2;
+                case 2:
+                    pmToolName = _a;
                     packageStr = "" + packageName + (version ? "@" + version : '');
                     try {
                         if (pmToolName === 'yarn') {
@@ -82,7 +95,8 @@ function upgradePackage(packageName, version) {
                         }
                         else {
                             if (version) {
-                                shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: context_1.default.silent });
+                                console.log(pmToolName + " install " + packageStr);
+                                shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact --registry http://r.npm.sankuai.com", { silent: context_1.default.silent });
                             }
                             else {
                                 shell.exec(pmToolName + " update " + packageStr, { silent: context_1.default.silent });

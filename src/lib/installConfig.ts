@@ -13,13 +13,13 @@ const chalk = require('chalk');
  * 安装共享的 ESLint 规则集
  * @param sharedEslintConfig 共享的 ESLint 规则集
  */
-const installConfig = async (sharedEslintConfig?: DepConfig) => {
+const installConfig = async (sharedEslintConfig?: DepConfig, pmTool?: string) => {
   const log = getConsisLogger();
   log(chalk.green('正在安装 eslint 配置集'));
   const configDep = sharedEslintConfig || DeafultSharedEslintConfig;
   const packageName = Object.keys(configDep)[0];
   const version = configDep[packageName];
-  const result = await installPackage(packageName, version);
+  const result = await installPackage(packageName, version, pmTool);
   log(chalk.green('eslint 配置集安装完成'));
   return result;
 };
