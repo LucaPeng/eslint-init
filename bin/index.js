@@ -23,10 +23,13 @@ var projectTypeMap = {
 
 let typescript = false;
 let silent = false;
+let ciSolution = initer.CiSolution.husky;
 
 for(;index < params.length; index++) {
   var param = params[index];
-  if (param === '--ts' || param === '--typescript') {
+  if (param === '--mfe') {
+    ciSolution = initer.CiSolution.mfe;
+  } else if (param === '--ts' || param === '--typescript') {
     typescript = true;
   } else if (param === '--silent') {
     silent = true;
@@ -42,7 +45,7 @@ for(;index < params.length; index++) {
 projectType = projectType || 'es6';
 initer.init({
   type: projectType,
-  ciSolution: initer.CiSolution.husky,
+  ciSolution: ciSolution,
   supportTypeScript: typescript,
   silent: silent,
 });

@@ -63,7 +63,7 @@ export const DeafultSharedEslintConfig: DepConfig = {
 };
 
 export const mfeCiDeps: DepConfig = {
-  '@mfe/precommit-eslint': '1.0.8',
+  '@mfe/precommit-eslint': '1.0.9',
 };
 
 export const huskyCiDeps: DepConfig = {

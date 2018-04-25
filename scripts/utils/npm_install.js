@@ -39,13 +39,13 @@ var pm_tool_1 = require("./pm_tool");
 var shell = require("shelljs");
 var logger_1 = require("../lib/logger");
 var context_1 = require("../lib/context");
-function installPackage(packageName, version, assigNpmTool) {
+function installPackage(packageName, version, assignPmTool) {
     return __awaiter(this, void 0, void 0, function () {
         var pmToolName, _a, packageStr, log;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    _a = assigNpmTool;
+                    _a = assignPmTool;
                     if (_a) return [3, 2];
                     return [4, pm_tool_1.default(packageName)];
                 case 1:
@@ -59,8 +59,7 @@ function installPackage(packageName, version, assigNpmTool) {
                             shell.exec("yarn add " + packageStr + " --dev", { silent: context_1.default.silent });
                         }
                         else {
-                            console.log(pmToolName + " install " + packageStr);
-                            shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact --registry http://r.npm.sankuai.com", { silent: context_1.default.silent });
+                            shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: context_1.default.silent });
                         }
                     }
                     catch (e) {
@@ -74,13 +73,13 @@ function installPackage(packageName, version, assigNpmTool) {
     });
 }
 exports.installPackage = installPackage;
-function upgradePackage(packageName, version, assigNpmTool) {
+function upgradePackage(packageName, version, assignPmTool) {
     return __awaiter(this, void 0, void 0, function () {
         var pmToolName, _a, packageStr, log;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    _a = assigNpmTool;
+                    _a = assignPmTool;
                     if (_a) return [3, 2];
                     return [4, pm_tool_1.default(packageName)];
                 case 1:
@@ -95,8 +94,7 @@ function upgradePackage(packageName, version, assigNpmTool) {
                         }
                         else {
                             if (version) {
-                                console.log(pmToolName + " install " + packageStr);
-                                shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact --registry http://r.npm.sankuai.com", { silent: context_1.default.silent });
+                                shell.exec(pmToolName + " install " + packageStr + " --save-dev --save-exact", { silent: context_1.default.silent });
                             }
                             else {
                                 shell.exec(pmToolName + " update " + packageStr, { silent: context_1.default.silent });
