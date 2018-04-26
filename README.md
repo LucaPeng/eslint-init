@@ -15,7 +15,7 @@ install
 use
 ```
   const eslintInit = require('eslint-init');
-  eslintInit({
+  eslintInit.init({
     type: 'node',
     silent: false,
     supportTypeScript: false,
@@ -26,7 +26,7 @@ use
 you can use the sharable eslint config maintained by yourself, use the sharedEslintConfig like: 
 
 ```
-  eslintInit({
+  eslintInit.init({
     type: 'node',
     ciSolution: eslintInit.CiSolution.husky,
     sharedEslintConfig: {
