@@ -44,7 +44,7 @@ exports.configDeps = {
     },
 };
 exports.tsDeps = {
-    'typescript-eslint-parser': '13.0.0',
+    'typescript-eslint-parser': '15.0.0',
     'eslint-plugin-typescript': '0.8.1',
 };
 exports.DeafultSharedEslintConfig = {

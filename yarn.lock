@@ -1676,16 +1676,16 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "http://r.npm.sankuai.com/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript-eslint-parser@13.0.0:
-  version "13.0.0"
-  resolved "http://r.npm.sankuai.com/typescript-eslint-parser/download/typescript-eslint-parser-13.0.0.tgz#57f9be603d0fad7c26da76c2be67c0779d23362c"
+typescript-eslint-parser@^15.0.0:
+  version "15.0.0"
+  resolved "http://r.npm.sankuai.com/typescript-eslint-parser/download/typescript-eslint-parser-15.0.0.tgz#882fd3d7aabffbab0a7f98d2a59fb9a989c2b37f"
   dependencies:
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-typescript@^2.7.2:
-  version "2.7.2"
-  resolved "http://r.npm.sankuai.com/typescript/download/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
+typescript@^2.8.3:
+  version "2.8.3"
+  resolved "http://r.npm.sankuai.com/typescript/download/typescript-2.8.3.tgz#5d817f9b6f31bb871835f4edf0089f21abe6c170"
 
 uri-js@^3.0.2:
   version "3.0.2"

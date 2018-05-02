@@ -1,6 +1,6 @@
 {
   "name": "eslint-init",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "integrate eslint to a fe project",
   "main": "scripts/index.js",
   "scripts": {
@@ -45,8 +45,8 @@
     "eslint-plugin-typescript": "0.8.1",
     "husky": "0.14.3",
     "lint-staged": "6.1.0",
-    "typescript": "^2.7.2",
-    "typescript-eslint-parser": "13.0.0"
+    "typescript": "^2.8.3",
+    "typescript-eslint-parser": "15.0.0"
   },
   "lint-staged": {
     "src/*/*.{js,ts}": "eslint"
